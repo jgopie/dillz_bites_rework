@@ -1,0 +1,95 @@
+---
+// About section component
+---
+
+<section id="about" class="about">
+	<div class="container">
+		<div class="about-content">
+			<div class="about-text">
+				<h2 class="section-title">About Dillz Bites</h2>
+				<p>Welcome to Dillz Bites, where every cake is a masterpiece and every bite tells a story. Our passion for baking began with a simple dream: to create beautiful, delicious cakes that bring joy to life's most special moments.</p>
+				<p>Using only the finest ingredients and time-honored techniques, we craft each cake with meticulous attention to detail. From elegant wedding cakes to whimsical birthday celebrations, we specialize in custom designs that perfectly capture your vision.</p>
+				<div class="features">
+					<div class="feature">
+						<h3>✨ Custom Designs</h3>
+						<p>Every cake is uniquely crafted to your specifications</p>
+					</div>
+					<div class="feature">
+						<h3>🎂 Premium Ingredients</h3>
+						<p>We use only the finest, freshest ingredients</p>
+					</div>
+					<div class="feature">
+						<h3>💝 Made with Love</h3>
+						<p>Each creation is handcrafted with passion and care</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.about {
+		padding: 80px 0;
+		background: var(--light-purple);
+	}
+
+	.section-title {
+		font-family: 'Dancing Script', cursive;
+		font-size: 3rem;
+		text-align: center;
+		margin-bottom: 1rem;
+		background: var(--gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.about-content {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.about-text p {
+		font-size: 1.1rem;
+		margin-bottom: 1.5rem;
+		line-height: 1.8;
+		color: var(--black);
+	}
+
+	.features {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 3rem;
+	}
+
+	.feature {
+		background: white;
+		padding: 2rem;
+		border-radius: 15px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+		transition: transform 0.3s ease;
+	}
+
+	.feature:hover {
+		transform: translateY(-5px);
+	}
+
+	.feature h3 {
+		color: var(--primary-pink);
+		margin-bottom: 1rem;
+		font-size: 1.2rem;
+	}
+
+	/* Mobile Responsive */
+	@media (max-width: 768px) {
+		.features {
+			grid-template-columns: 1fr;
+		}
+
+		.section-title {
+			font-size: 2.5rem;
+		}
+	}
+</style> 

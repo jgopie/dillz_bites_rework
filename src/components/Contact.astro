@@ -1,0 +1,159 @@
+---
+// Contact section component
+---
+
+<section id="contact" class="contact">
+	<div class="container">
+		<h2 class="section-title">Get In Touch</h2>
+		<p class="section-subtitle">Ready to create something sweet together?</p>
+		
+		<div class="contact-content">
+			<div class="contact-info">
+				<div class="contact-item">
+					<h3>📞 Phone</h3>
+					<p>Call us for consultations and orders</p>
+					<a href="tel:+1234567890">(123) 456-7890</a>
+				</div>
+				<div class="contact-item">
+					<h3>📧 Email</h3>
+					<p>Send us your cake dreams</p>
+					<a href="mailto:orders@dillzbites.com">orders@dillzbites.com</a>
+				</div>
+				<div class="contact-item">
+					<h3>⏰ Hours</h3>
+					<p>Tuesday - Saturday: 9am - 6pm</p>
+					<p>Sunday: 10am - 4pm</p>
+					<p>Closed Mondays</p>
+				</div>
+			</div>
+			
+			<div class="contact-form">
+				<form id="contact-form">
+					<input type="text" placeholder="Your Name" required>
+					<input type="email" placeholder="Your Email" required>
+					<input type="tel" placeholder="Phone Number">
+					<textarea placeholder="Tell us about your dream cake..." rows="5" required></textarea>
+					<button type="submit" class="submit-btn">Send Message</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.contact {
+		padding: 80px 0;
+		background: var(--white);
+	}
+
+	.section-title {
+		font-family: 'Dancing Script', cursive;
+		font-size: 3rem;
+		text-align: center;
+		margin-bottom: 1rem;
+		background: var(--gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.section-subtitle {
+		text-align: center;
+		font-size: 1.1rem;
+		color: var(--primary-purple);
+		margin-bottom: 3rem;
+	}
+
+	.contact-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		margin-top: 3rem;
+	}
+
+	.contact-info {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.contact-item {
+		background: var(--light-blue);
+		padding: 2rem;
+		border-radius: 15px;
+	}
+
+	.contact-item h3 {
+		color: var(--primary-purple);
+		margin-bottom: 0.5rem;
+	}
+
+	.contact-item a {
+		color: var(--primary-pink);
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.contact-form {
+		background: var(--light-purple);
+		padding: 2rem;
+		border-radius: 15px;
+	}
+
+	.contact-form input,
+	.contact-form textarea {
+		width: 100%;
+		padding: 1rem;
+		margin-bottom: 1rem;
+		border: 2px solid transparent;
+		border-radius: 10px;
+		font-family: 'Poppins', sans-serif;
+		transition: border-color 0.3s ease;
+	}
+
+	.contact-form input:focus,
+	.contact-form textarea:focus {
+		outline: none;
+		border-color: var(--primary-pink);
+	}
+
+	.submit-btn {
+		background: var(--gradient);
+		color: white;
+		padding: 1rem 2rem;
+		border: none;
+		border-radius: 10px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: transform 0.3s ease;
+		width: 100%;
+	}
+
+	.submit-btn:hover {
+		transform: translateY(-2px);
+	}
+
+	/* Mobile Responsive */
+	@media (max-width: 768px) {
+		.contact-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.section-title {
+			font-size: 2.5rem;
+		}
+	}
+</style>
+
+<script>
+	// Form submission
+	const form = document.querySelector('#contact-form') as HTMLFormElement;
+	if (form) {
+		form.addEventListener('submit', (e: Event) => {
+			e.preventDefault();
+			alert('Thank you for your message! We\'ll get back to you soon.');
+			form.reset();
+		});
+	}
+</script> 
