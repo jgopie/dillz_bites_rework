@@ -84,12 +84,85 @@
 
 	/* Mobile Responsive */
 	@media (max-width: 768px) {
+		.about {
+			padding: 60px 0;
+		}
+
+		.about-content {
+			padding: 0 1.5rem;
+		}
+
+		.about-text p {
+			font-size: 1rem;
+			margin-bottom: 1.25rem;
+			line-height: 1.7;
+		}
+
 		.features {
 			grid-template-columns: 1fr;
+			gap: 1.5rem;
+			margin-top: 2.5rem;
+		}
+
+		.feature {
+			padding: 1.75rem;
+			border-radius: 12px;
+		}
+
+		.feature h3 {
+			font-size: 1.15rem;
+			margin-bottom: 0.75rem;
 		}
 
 		.section-title {
 			font-size: 2.5rem;
+			margin-bottom: 0.75rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.about {
+			padding: 50px 0;
+		}
+
+		.about-content {
+			padding: 0 1rem;
+		}
+
+		.about-text p {
+			font-size: 0.95rem;
+			margin-bottom: 1rem;
+		}
+
+		.features {
+			gap: 1.25rem;
+			margin-top: 2rem;
+		}
+
+		.feature {
+			padding: 1.5rem;
+		}
+
+		.feature h3 {
+			font-size: 1.1rem;
+		}
+
+		.section-title {
+			font-size: 2.2rem;
+		}
+	}
+
+	@media (max-width: 360px) {
+		.about-content {
+			padding: 0 0.75rem;
+		}
+
+		.feature {
+			padding: 1.25rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
 		}
 	}
 </style> 
