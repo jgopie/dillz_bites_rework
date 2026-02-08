@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: dillz-bites
+    runtime: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm ci && npm run build
+    startCommand: node ./dist/server/entry.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: RESEND_API_KEY
+        sync: false
+      - key: ORDER_NOTIFICATION_EMAIL
+        value: orders@dillzbites.com
+      - key: ORDER_FROM_EMAIL
+        value: Dillz Bites <orders@dillzbites.com>
+      - key: BUSINESS_REPLY_TO_EMAIL
+        value: orders@dillzbites.com
+      - key: RATE_LIMIT_MAX
+        value: "5"
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+      - key: ENABLE_ORDER_FORM
+        value: "true"

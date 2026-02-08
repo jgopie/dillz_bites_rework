@@ -1,0 +1,43 @@
+.order-form-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.order-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.order-field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.order-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.order-consent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.order-form__error {
+  min-height: 1.2em;
+}
+
+.order-form__error-spacer {
+  min-height: 1.2em;
+}
+
+.order-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}

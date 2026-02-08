@@ -1,168 +1,74 @@
----
-// About section component
----
+<section class="section about" id="about">
+  <div class="container about-grid">
+    <div data-reveal>
+      <p class="eyebrow">About Dillz Bites</p>
+      <h2 class="section-title">From sketch to final slice, your cake is built to match your moment.</h2>
+      <p class="section-intro">
+        Dillz Bites is a sole-proprietor bakery focused on custom cakes for meaningful celebrations. Every order is
+        handmade in small batches with premium ingredients, thoughtful flavor pairing, and polished finishing details.
+      </p>
+      <p class="section-intro">
+        We begin with your event goals, then shape design, portion size, and decoration style around your budget and
+        timeline. The result is a cake that feels personal, memorable, and photo-ready.
+      </p>
+    </div>
 
-<section id="about" class="about">
-	<div class="container">
-		<div class="about-content">
-			<div class="about-text">
-				<h2 class="section-title">About Dillz Bites</h2>
-				<p>Welcome to Dillz Bites, where every cake is a masterpiece and every bite tells a story. Our passion for baking began with a simple dream: to create beautiful, delicious cakes that bring joy to life's most special moments.</p>
-				<p>Using only the finest ingredients and time-honored techniques, we craft each cake with meticulous attention to detail. From elegant wedding cakes to whimsical birthday celebrations, we specialize in custom designs that perfectly capture your vision.</p>
-				<div class="features">
-					<div class="feature">
-						<h3>✨ Custom Designs</h3>
-						<p>Every cake is uniquely crafted to your specifications</p>
-					</div>
-					<div class="feature">
-						<h3>🎂 Premium Ingredients</h3>
-						<p>We use only the finest, freshest ingredients</p>
-					</div>
-					<div class="feature">
-						<h3>💝 Made with Love</h3>
-						<p>Each creation is handcrafted with passion and care</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="about-cards" data-reveal>
+      <article>
+        <h3>Design-first custom work</h3>
+        <p>Each brief is tailored, with color direction and design motifs selected for your event.</p>
+      </article>
+      <article>
+        <h3>Flavor and finish balance</h3>
+        <p>Texture, sweetness, and serving practicality are tuned so the cake looks and tastes exceptional.</p>
+      </article>
+      <article>
+        <h3>Clear communication</h3>
+        <p>Orders are reviewed quickly with confirmation details shared directly by email.</p>
+      </article>
+    </div>
+  </div>
 </section>
 
 <style>
-	.about {
-		padding: 80px 0;
-		background: var(--light-purple);
-	}
+  .about {
+    background-color: var(--surface-muted);
+  }
 
-	.section-title {
-		font-family: 'Dancing Script', cursive;
-		font-size: 3rem;
-		text-align: center;
-		margin-bottom: 1rem;
-		background: var(--gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
+  .about-grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
 
-	.about-content {
-		max-width: 1000px;
-		margin: 0 auto;
-	}
+  .about-cards {
+    display: grid;
+    gap: var(--space-4);
+  }
 
-	.about-text p {
-		font-size: 1.1rem;
-		margin-bottom: 1.5rem;
-		line-height: 1.8;
-		color: var(--black);
-	}
+  .about-cards article {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+  }
 
-	.features {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 2rem;
-		margin-top: 3rem;
-	}
+  .about-cards h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+  }
 
-	.feature {
-		background: white;
-		padding: 2rem;
-		border-radius: 15px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-		transition: transform 0.3s ease;
-	}
+  .about-cards p {
+    margin: var(--space-3) 0 0;
+    color: var(--text-muted);
+  }
 
-	.feature:hover {
-		transform: translateY(-5px);
-	}
-
-	.feature h3 {
-		color: var(--primary-pink);
-		margin-bottom: 1rem;
-		font-size: 1.2rem;
-	}
-
-	/* Mobile Responsive */
-	@media (max-width: 768px) {
-		.about {
-			padding: 60px 0;
-		}
-
-		.about-content {
-			padding: 0 1.5rem;
-		}
-
-		.about-text p {
-			font-size: 1rem;
-			margin-bottom: 1.25rem;
-			line-height: 1.7;
-		}
-
-		.features {
-			grid-template-columns: 1fr;
-			gap: 1.5rem;
-			margin-top: 2.5rem;
-		}
-
-		.feature {
-			padding: 1.75rem;
-			border-radius: 12px;
-		}
-
-		.feature h3 {
-			font-size: 1.15rem;
-			margin-bottom: 0.75rem;
-		}
-
-		.section-title {
-			font-size: 2.5rem;
-			margin-bottom: 0.75rem;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.about {
-			padding: 50px 0;
-		}
-
-		.about-content {
-			padding: 0 1rem;
-		}
-
-		.about-text p {
-			font-size: 0.95rem;
-			margin-bottom: 1rem;
-		}
-
-		.features {
-			gap: 1.25rem;
-			margin-top: 2rem;
-		}
-
-		.feature {
-			padding: 1.5rem;
-		}
-
-		.feature h3 {
-			font-size: 1.1rem;
-		}
-
-		.section-title {
-			font-size: 2.2rem;
-		}
-	}
-
-	@media (max-width: 360px) {
-		.about-content {
-			padding: 0 0.75rem;
-		}
-
-		.feature {
-			padding: 1.25rem;
-		}
-
-		.section-title {
-			font-size: 2rem;
-		}
-	}
-</style> 
+  @media (max-width: 58rem) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

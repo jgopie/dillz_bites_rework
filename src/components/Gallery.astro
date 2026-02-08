@@ -1,355 +1,98 @@
 ---
-// Gallery carousel component
+import { Image, getImage } from 'astro:assets';
+import CakeCarousel from './react/CakeCarousel';
+import { cakeCarouselSlides, carouselImageSizes, carouselImageWidths } from './react/carousel-slides';
+
+function pickFallbackSrc(
+  candidates: { url: string; descriptor?: string }[],
+  preferredWidth: number
+): string {
+  const parsed = candidates
+    .map((candidate) => ({
+      ...candidate,
+      width: candidate.descriptor?.endsWith('w') ? Number.parseInt(candidate.descriptor, 10) : Number.NaN
+    }))
+    .filter((candidate) => Number.isFinite(candidate.width))
+    .sort((left, right) => left.width - right.width);
+
+  if (parsed.length === 0) {
+    return candidates[0]?.url ?? '';
+  }
+
+  const atOrBelowPreferred = [...parsed].reverse().find((candidate) => candidate.width <= preferredWidth);
+  return atOrBelowPreferred?.url ?? parsed[0].url;
+}
+
+const fallbackWidth = 860;
+
+const optimizedSlides = await Promise.all(
+  cakeCarouselSlides.map(async (slide) => {
+    const webpImage = await getImage({
+      src: slide.image,
+      widths: [...carouselImageWidths],
+      format: 'webp',
+      quality: 72
+    });
+
+    const jpegImage = await getImage({
+      src: slide.image,
+      widths: [...carouselImageWidths],
+      format: 'jpg',
+      quality: 78
+    });
+
+    return {
+      id: slide.id,
+      alt: slide.alt,
+      fallbackSrc: pickFallbackSrc(jpegImage.srcSet.values, fallbackWidth) || jpegImage.src,
+      fallbackSrcSet: jpegImage.srcSet.attribute,
+      webpSrcSet: webpImage.srcSet.attribute,
+      sizes: carouselImageSizes,
+      width: slide.image.width,
+      height: slide.image.height
+    };
+  })
+);
 ---
 
-<section id="gallery" class="gallery">
-	<div class="container">
-		<h2 class="section-title">Our Delicious Creations</h2>
-		<p class="section-subtitle">Every cake tells a story, crafted with passion and attention to detail</p>
-		
-		<div class="carousel-container">
-			<div class="carousel">
-				<div class="carousel-track">
-					<div class="carousel-slide active">
-						<img src="/images/cake_1.jpg" alt="Elegant layered cake" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_2.jpg" alt="Chocolate masterpiece" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_3.jpg" alt="Colorful celebration cake" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_4.jpg" alt="Wedding cake design" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_5.jpg" alt="Birthday special" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_6.jpg" alt="Custom themed cake" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_7.jpg" alt="Artisan decorated cake" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_8.jpg" alt="Modern cake design" />
-					</div>
-					<div class="carousel-slide">
-						<img src="/images/cake_9.jpg" alt="Specialty cake creation" />
-					</div>
-				</div>
-			</div>
-			
-			<button class="carousel-btn prev">❮</button>
-			<button class="carousel-btn next">❯</button>
-			
-			<div class="carousel-dots">
-				<span class="dot active" data-slide="1"></span>
-				<span class="dot" data-slide="2"></span>
-				<span class="dot" data-slide="3"></span>
-				<span class="dot" data-slide="4"></span>
-				<span class="dot" data-slide="5"></span>
-				<span class="dot" data-slide="6"></span>
-				<span class="dot" data-slide="7"></span>
-				<span class="dot" data-slide="8"></span>
-				<span class="dot" data-slide="9"></span>
-			</div>
-		</div>
-	</div>
+<section class="section gallery" id="gallery" aria-label="Recent Dillz Bites cake creations">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Recent Work</p>
+    <h2 class="section-title" data-reveal>A gallery of hand-finished cakes</h2>
+    <p class="section-intro" data-reveal>
+      Every cake starts with a conversation. Browse recent designs for inspiration and note what styles, colors,
+      and mood you want us to build around your event.
+    </p>
+
+    <div class="carousel-shell" data-reveal>
+      <noscript>
+        <figure class="gallery-fallback">
+          <Image src={cakeCarouselSlides[0].image} alt={cakeCarouselSlides[0].alt} widths={[760, 980]} />
+        </figure>
+      </noscript>
+
+      <CakeCarousel client:visible slides={optimizedSlides} autoplayDelay={7000} />
+    </div>
+  </div>
 </section>
 
 <style>
-	.gallery {
-		padding: 80px 0;
-		background: var(--white);
-	}
+  .gallery {
+    background: linear-gradient(180deg, var(--surface-muted), var(--bg-surface));
+  }
 
-	.section-title {
-		font-family: 'Dancing Script', cursive;
-		font-size: 3rem;
-		text-align: center;
-		margin-bottom: 1rem;
-		background: var(--gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
+  .carousel-shell {
+    margin-top: var(--space-6);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(1rem, 2vw, 1.5rem);
+  }
 
-	.section-subtitle {
-		text-align: center;
-		font-size: 1.1rem;
-		color: var(--primary-purple);
-		margin-bottom: 3rem;
-	}
-
-	.carousel-container {
-		position: relative;
-		max-width: 800px;
-		margin: 0 auto;
-	}
-
-	.carousel {
-		position: relative;
-		overflow: hidden;
-		border-radius: 20px;
-		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-	}
-
-	.carousel-track {
-		display: flex;
-		transition: transform 0.5s ease;
-	}
-
-	.carousel-slide {
-		min-width: 100%;
-		height: auto;
-		min-height: 400px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: #f9f9f9;
-	}
-
-	.carousel-slide img {
-		width: 100%;
-		height: auto;
-		max-height: 500px;
-		object-fit: contain;
-		border-radius: 10px;
-	}
-
-	.carousel-btn {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		background: rgba(255, 255, 255, 0.9);
-		border: none;
-		padding: 1rem;
-		font-size: 1.5rem;
-		cursor: pointer;
-		border-radius: 50%;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-		transition: all 0.3s ease;
-		z-index: 10;
-	}
-
-	.carousel-btn:hover {
-		background: var(--primary-pink);
-		color: white;
-		transform: translateY(-50%) scale(1.1);
-	}
-
-	.prev {
-		left: 20px;
-	}
-
-	.next {
-		right: 20px;
-	}
-
-	.carousel-dots {
-		text-align: center;
-		margin-top: 2rem;
-	}
-
-	.dot {
-		display: inline-block;
-		width: 15px;
-		height: 15px;
-		background: #ddd;
-		border-radius: 50%;
-		margin: 0 5px;
-		cursor: pointer;
-		transition: background 0.3s ease;
-	}
-
-	.dot.active {
-		background: var(--primary-pink);
-	}
-
-	/* Mobile Responsive */
-	@media (max-width: 768px) {
-		.gallery {
-			padding: 60px 0;
-		}
-
-		.carousel-container {
-			margin: 0 1rem;
-		}
-
-		.carousel {
-			border-radius: 15px;
-		}
-
-		.carousel-slide {
-			min-height: 280px;
-			padding: 1rem;
-		}
-
-		.carousel-slide img {
-			max-height: 350px;
-			border-radius: 8px;
-		}
-
-		.carousel-btn {
-			padding: 0.75rem;
-			font-size: 1.3rem;
-			width: 45px;
-			height: 45px;
-		}
-
-		.prev {
-			left: 15px;
-		}
-
-		.next {
-			right: 15px;
-		}
-
-		.section-title {
-			font-size: 2.5rem;
-			margin-bottom: 0.75rem;
-		}
-
-		.section-subtitle {
-			font-size: 1rem;
-			margin-bottom: 2.5rem;
-			padding: 0 1rem;
-		}
-
-		.carousel-dots {
-			margin-top: 1.5rem;
-			padding: 0 1rem;
-		}
-
-		.dot {
-			width: 12px;
-			height: 12px;
-			margin: 0 4px;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.gallery {
-			padding: 50px 0;
-		}
-
-		.carousel-container {
-			margin: 0 0.5rem;
-		}
-
-		.carousel-slide {
-			min-height: 240px;
-			padding: 0.5rem;
-		}
-
-		.carousel-slide img {
-			max-height: 280px;
-		}
-
-		.carousel-btn {
-			padding: 0.6rem;
-			font-size: 1.1rem;
-			width: 40px;
-			height: 40px;
-		}
-
-		.prev {
-			left: 8px;
-		}
-
-		.next {
-			right: 8px;
-		}
-
-		.section-title {
-			font-size: 2.2rem;
-		}
-
-		.section-subtitle {
-			font-size: 0.95rem;
-			margin-bottom: 2rem;
-		}
-	}
-
-	@media (max-width: 360px) {
-		.carousel-slide {
-			min-height: 200px;
-		}
-
-		.carousel-slide img {
-			max-height: 220px;
-		}
-
-		.section-title {
-			font-size: 2rem;
-		}
-
-		.dot {
-			width: 10px;
-			height: 10px;
-			margin: 0 3px;
-		}
-	}
+  .gallery-fallback {
+    margin: 0;
+    border-radius: var(--radius-md);
+    overflow: clip;
+  }
 </style>
-
-<script>
-	let currentSlideIndex = 0;
-	const slides = document.querySelectorAll('.carousel-slide');
-	const dots = document.querySelectorAll('.dot');
-	const totalSlides = slides.length;
-
-	function showSlide(index: number) {
-		const track = document.querySelector('.carousel-track') as HTMLElement;
-		const slideWidth = (slides[0] as HTMLElement).offsetWidth;
-		
-		// Remove active class from all slides and dots
-		slides.forEach(slide => slide.classList.remove('active'));
-		dots.forEach(dot => dot.classList.remove('active'));
-		
-		// Add active class to current slide and dot
-		slides[index].classList.add('active');
-		dots[index].classList.add('active');
-		
-		// Move the track
-		if (track) {
-			track.style.transform = `translateX(-${index * slideWidth}px)`;
-		}
-	}
-
-	function changeSlide(direction: number) {
-		currentSlideIndex += direction;
-		
-		if (currentSlideIndex >= totalSlides) {
-			currentSlideIndex = 0;
-		} else if (currentSlideIndex < 0) {
-			currentSlideIndex = totalSlides - 1;
-		}
-		
-		showSlide(currentSlideIndex);
-	}
-
-	function currentSlide(index: number) {
-		currentSlideIndex = index - 1;
-		showSlide(currentSlideIndex);
-	}
-
-	// Carousel button event listeners
-	const prevBtn = document.querySelector('.carousel-btn.prev') as HTMLButtonElement;
-	const nextBtn = document.querySelector('.carousel-btn.next') as HTMLButtonElement;
-	
-	if (prevBtn && nextBtn) {
-		prevBtn.addEventListener('click', () => changeSlide(-1));
-		nextBtn.addEventListener('click', () => changeSlide(1));
-	}
-
-	// Carousel dots event listeners
-	document.querySelectorAll('.dot').forEach((dot, index) => {
-		dot.addEventListener('click', () => currentSlide(index + 1));
-	});
-
-	// Auto-advance carousel
-	setInterval(() => {
-		changeSlide(1);
-	}, 5000);
-</script> 

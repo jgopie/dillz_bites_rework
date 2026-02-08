@@ -1,311 +1,83 @@
----
-// Contact section component
----
+<section class="section contact" id="contact">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Contact</p>
+    <h2 class="section-title" data-reveal>Tell us what you are celebrating and we will guide your next step.</h2>
+    <p class="section-intro" data-reveal>
+      For custom cakes, the fastest path is the order form. If you need quick clarification first, use the direct
+      contact options below.
+    </p>
 
-<section id="contact" class="contact">
-	<div class="container">
-		<h2 class="section-title">Get In Touch</h2>
-		<p class="section-subtitle">Ready to create something sweet together?</p>
-		
-		<div class="contact-content">
-			<div class="contact-info">
-				<div class="contact-item">
-					<h3>📞 Phone</h3>
-					<p>Call us for consultations and orders</p>
-					<a href="tel:+18687674628">(868) 767-4628</a>
-				</div>
-				<div class="contact-item">
-					<h3>📧 Email</h3>
-					<p>Send us your cake dreams</p>
-					<a href="mailto:orders@dillzbites.com">orders@dillzbites.com</a>
-				</div>
-				<div class="contact-item">
-					<h3>⏰ Hours</h3>
-					<p>Tuesday - Saturday: 9am - 6pm</p>
-					<p>Sunday: 10am - 4pm</p>
-					<p>Closed Mondays</p>
-				</div>
-			</div>
-			
-			<div class="contact-form">
-				<form id="contact-form">
-					<input type="text" placeholder="Your Name" required>
-					<input type="email" placeholder="Your Email" required>
-					<input type="tel" placeholder="Phone Number">
-					<textarea placeholder="Tell us about your dream cake..." rows="5" required></textarea>
-					<button type="submit" class="submit-btn">Send Message</button>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="contact-grid" data-reveal>
+      <article>
+        <h3>Phone</h3>
+        <p>Consultations and time-sensitive updates.</p>
+        <a href="tel:+18687674628">(868) 767-4628</a>
+      </article>
+
+      <article>
+        <h3>Email</h3>
+        <p>General inquiries and order follow-up.</p>
+        <a href="mailto:orders@dillzbites.com">orders@dillzbites.com</a>
+      </article>
+
+      <article>
+        <h3>Hours</h3>
+        <p>Tuesday-Saturday: 9:00 AM-6:00 PM</p>
+        <p>Sunday: 10:00 AM-4:00 PM</p>
+        <p>Closed Mondays</p>
+      </article>
+    </div>
+
+    <div class="contact-actions" data-reveal>
+      <a href="/order" class="button">Place a Cake Order</a>
+      <a href="mailto:orders@dillzbites.com" class="button-outline">Send an Email</a>
+    </div>
+  </div>
 </section>
 
 <style>
-	.contact {
-		padding: 80px 0;
-		background: var(--white);
-	}
+  .contact-grid {
+    margin-top: var(--space-6);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
 
-	.contact .container {
-		padding: 0 40px;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
+  .contact-grid article {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+  }
 
-	.section-title {
-		font-family: 'Dancing Script', cursive;
-		font-size: 3rem;
-		text-align: center;
-		margin-bottom: 1rem;
-		background: var(--gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
+  .contact-grid h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+  }
 
-	.section-subtitle {
-		text-align: center;
-		font-size: 1.1rem;
-		color: var(--primary-purple);
-		margin-bottom: 3rem;
-	}
+  .contact-grid p {
+    margin: var(--space-2) 0;
+    color: var(--text-muted);
+  }
 
-	.contact-content {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
-		margin-top: 3rem;
-		padding: 0 20px;
-	}
+  .contact-grid a {
+    color: var(--accent-primary);
+    font-weight: 700;
+    text-decoration: none;
+  }
 
-	.contact-info {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
+  .contact-actions {
+    margin-top: var(--space-6);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
 
-	.contact-item {
-		background: var(--light-blue);
-		padding: 2rem;
-		border-radius: 15px;
-		margin: 0 10px;
-	}
-
-	.contact-item h3 {
-		color: var(--primary-purple);
-		margin-bottom: 0.5rem;
-	}
-
-	.contact-item a {
-		color: var(--primary-pink);
-		text-decoration: none;
-		font-weight: 600;
-	}
-
-	.contact-form {
-		background: var(--light-purple);
-		padding: 2rem;
-		border-radius: 15px;
-		margin: 0 10px;
-	}
-
-	.contact-form input,
-	.contact-form textarea {
-		width: 100%;
-		padding: 1rem;
-		margin-bottom: 1rem;
-		border: 2px solid transparent;
-		border-radius: 10px;
-		font-family: 'Poppins', sans-serif;
-		transition: border-color 0.3s ease;
-		box-sizing: border-box;
-	}
-
-	.contact-form input:focus,
-	.contact-form textarea:focus {
-		outline: none;
-		border-color: var(--primary-pink);
-	}
-
-	.submit-btn {
-		background: var(--gradient);
-		color: white;
-		padding: 1rem 2rem;
-		border: none;
-		border-radius: 10px;
-		font-weight: 600;
-		cursor: pointer;
-		transition: transform 0.3s ease;
-		width: 100%;
-	}
-
-	.submit-btn:hover {
-		transform: translateY(-2px);
-	}
-
-	/* Mobile Responsive */
-	@media (max-width: 768px) {
-		.contact {
-			padding: 60px 0;
-		}
-
-		.contact .container {
-			padding: 0 30px;
-		}
-
-		.contact-content {
-			grid-template-columns: 1fr;
-			gap: 2.5rem;
-			margin-top: 2.5rem;
-			padding: 0 10px;
-		}
-
-		.contact-info {
-			gap: 1.5rem;
-		}
-
-		.contact-item {
-			padding: 1.75rem;
-			border-radius: 12px;
-			margin: 0 5px;
-		}
-
-		.contact-item h3 {
-			font-size: 1.15rem;
-			margin-bottom: 0.75rem;
-		}
-
-		.contact-item p {
-			font-size: 0.95rem;
-			margin-bottom: 0.5rem;
-		}
-
-		.contact-form {
-			padding: 2rem 1.5rem;
-			border-radius: 12px;
-			margin: 0 5px;
-			max-width: 100%;
-		}
-
-		.contact-form input,
-		.contact-form textarea {
-			padding: 1.1rem;
-			margin-bottom: 1.25rem;
-			border-radius: 8px;
-			font-size: 1rem;
-			width: 100%;
-			box-sizing: border-box;
-		}
-
-		.submit-btn {
-			padding: 1.2rem 2rem;
-			border-radius: 8px;
-			font-size: 1.1rem;
-		}
-
-		.section-title {
-			font-size: 2.5rem;
-			margin-bottom: 0.75rem;
-		}
-
-		.section-subtitle {
-			font-size: 1rem;
-			margin-bottom: 2.5rem;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.contact {
-			padding: 50px 0;
-		}
-
-		.contact .container {
-			padding: 0 20px;
-		}
-
-		.contact-content {
-			gap: 2rem;
-			margin-top: 2rem;
-			padding: 0 5px;
-		}
-
-		.contact-info {
-			gap: 1.25rem;
-		}
-
-		.contact-item {
-			padding: 1.5rem;
-			margin: 0;
-		}
-
-		.contact-item h3 {
-			font-size: 1.1rem;
-		}
-
-		.contact-item p {
-			font-size: 0.9rem;
-		}
-
-		.contact-form {
-			padding: 1.75rem 1.25rem;
-			margin: 0;
-			max-width: 100%;
-		}
-
-		.contact-form input,
-		.contact-form textarea {
-			padding: 1rem;
-			font-size: 0.95rem;
-			width: 100%;
-			box-sizing: border-box;
-		}
-
-		.submit-btn {
-			padding: 1.1rem 1.75rem;
-			font-size: 1rem;
-		}
-
-		.section-title {
-			font-size: 2.2rem;
-		}
-
-		.section-subtitle {
-			font-size: 0.95rem;
-			margin-bottom: 2rem;
-		}
-	}
-
-	@media (max-width: 360px) {
-		.contact .container {
-			padding: 0 15px;
-		}
-
-		.contact-content {
-			padding: 0;
-		}
-
-		.contact-item {
-			padding: 1.25rem;
-		}
-
-		.contact-form {
-			padding: 1.5rem 1rem;
-		}
-
-		.section-title {
-			font-size: 2rem;
-		}
-	}
+  @media (max-width: 52rem) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
-
-<script>
-	// Form submission
-	const form = document.querySelector('#contact-form') as HTMLFormElement;
-	if (form) {
-		form.addEventListener('submit', (e: Event) => {
-			e.preventDefault();
-			alert('Thank you for your message! We\'ll get back to you soon.');
-			form.reset();
-		});
-	}
-</script> 

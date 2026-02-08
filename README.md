@@ -1,47 +1,57 @@
-# Astro Starter Kit: Minimal
+# Dillz Bites Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Dillz Bites is a marketing and ordering website for a sole proprietor baker specializing in bespoke cakes.
+The site is built with Astro and includes a server-rendered order API that validates requests and sends two emails:
+1. Internal notification to the bakery inbox.
+2. Customer confirmation email with request reference ID.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## Tech stack
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Astro 5
+- Astro Node adapter (`@astrojs/node`) for server output
+- Astro React integration (`@astrojs/react`) for interactive islands
+- Embla carousel (`embla-carousel-react`)
+- Radix Themes (`@radix-ui/themes`)
+- Resend for transactional email delivery
+- Zod for request validation
+- Vitest for unit and endpoint tests
 
-## 🚀 Project Structure
+## Quick links
 
-Inside of your Astro project, you'll see the following folders and files:
+- Run locally: [`docs/quickstart.md`](docs/quickstart.md)
+- Environment/config: [`docs/configuration.md`](docs/configuration.md)
+- Architecture: [`docs/architecture.md`](docs/architecture.md)
+- Design spec: [`docs/design-spec.md`](docs/design-spec.md)
+- UI system: [`docs/ui-system.md`](docs/ui-system.md)
+- Order API + flow: [`docs/order-flow.md`](docs/order-flow.md)
+- Render deployment: [`docs/deployment-render.md`](docs/deployment-render.md)
+- Content updates: [`docs/content-updates.md`](docs/content-updates.md)
+- Troubleshooting: [`docs/troubleshooting.md`](docs/troubleshooting.md)
+- Security notes: [`docs/security.md`](docs/security.md)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Scripts
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- `npm run dev` - Start local development server
+- `npm run build` - Build production output
+- `npm run preview` - Preview the built app
+- `npm run test` - Run test suite
+- `npm run test:watch` - Run tests in watch mode
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Docs update tag
 
-Any static assets, like images, can be placed in the `public/` directory.
+Docs last updated: `docs-2026-02-07`
 
-## 🧞 Commands
+Docs audited through commit: `a900a63`
 
-All commands are run from the root of the project, from a terminal:
+This tag marks the last commit where `README.md` + `docs/` were audited/updated.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- View changes since docs were last updated: `git log docs-2026-02-07..HEAD --oneline`
+- Diff docs vs current: `git diff docs-2026-02-07..HEAD -- README.md docs/`
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Update procedure:
+1. Pick a new tag name like `docs-YYYY-MM-DD`.
+2. Before making docs changes, set `Docs audited through commit` to the current code commit with `git rev-parse --short HEAD`.
+3. Update the `Docs last updated` line in the same commit as your docs changes.
+4. Commit with `docs: sync docs (docs-YYYY-MM-DD)`.
+5. Create the annotated tag: `git tag -a docs-YYYY-MM-DD -m "docs: sync docs"`.
+6. Push the tag: `git push origin docs-YYYY-MM-DD`.

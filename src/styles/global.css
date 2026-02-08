@@ -1,0 +1,169 @@
+@import '@radix-ui/themes/styles.css';
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --sticky-header-offset: 5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--sticky-header-offset);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-strong);
+  background:
+    radial-gradient(circle at top right, var(--accent-primary-mist), transparent 48%),
+    radial-gradient(circle at bottom left, var(--accent-secondary-mist), transparent 46%),
+    var(--bg-canvas);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+main {
+  min-height: 70vh;
+}
+
+.container {
+  width: min(100% - 2.5rem, var(--content-max));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.eyebrow {
+  color: var(--accent-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.8vw, 3.3rem);
+  line-height: 1.1;
+  color: var(--text-strong);
+}
+
+.section-intro {
+  margin-top: var(--space-4);
+  color: var(--text-muted);
+  max-width: 65ch;
+}
+
+.button,
+.button-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.3rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: transform var(--transition-fast), background-color var(--transition-fast),
+    border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+}
+
+.button {
+  background: linear-gradient(125deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-sm);
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.button-outline {
+  color: var(--text-strong);
+  border-color: var(--border-soft);
+  background-color: var(--surface-frost);
+}
+
+.button-outline:hover,
+.button-outline:focus-visible {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Screen-reader only utility (used for carousel instructions/live status). */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Reveal animations only apply when JS is enabled; otherwise content must remain visible. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 44rem) {
+  .container {
+    width: min(100% - 1.25rem, var(--content-max));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

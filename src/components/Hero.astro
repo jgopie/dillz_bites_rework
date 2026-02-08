@@ -1,183 +1,103 @@
 ---
-// Hero section component
+import { Image } from 'astro:assets';
+import cakeCollage from '../assets/images/cake_collage.jpg';
 ---
 
-<section id="home" class="hero">
-	<div class="hero-content">
-		<div class="hero-text">
-			<h1 class="hero-title">Dillz Bites</h1>
-			<p class="hero-subtitle">Artisan Bakery</p>
-			<p class="hero-description">Creating delicious custom cakes and baked goods with love, passion, and the finest ingredients</p>
-			<a href="#gallery" class="cta-button">View Our Creations</a>
-		</div>
-		<div class="hero-image">
-			<img src="/images/cake_collage.jpg" alt="Beautiful cake collage" />
-		</div>
-	</div>
+<section class="hero section" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy" data-reveal>
+      <p class="eyebrow">Bespoke Cakes for Every Occasion</p>
+      <h1>Designed with care, baked fresh, and built around your celebration.</h1>
+      <p>
+        Dillz Bites crafts custom cakes for birthdays, weddings, showers, and special milestones. Share your
+        vision and we will shape flavor, style, and scale around your event.
+      </p>
+      <div class="hero-actions">
+        <a href="/order" class="button">Start Your Order</a>
+        <a href="#gallery" class="button-outline">See Recent Cakes</a>
+      </div>
+    </div>
+
+    <div class="hero-image" data-reveal>
+      <Image
+        src={cakeCollage}
+        alt="Collage of custom cakes made by Dillz Bites"
+        widths={[420, 620, 860]}
+        sizes="(max-width: 52rem) 100vw, 48vw"
+        loading="eager"
+      />
+      <div class="hero-badge">Custom consultations available Tuesday to Saturday</div>
+    </div>
+  </div>
 </section>
 
 <style>
-	.hero {
-		padding: 120px 0 80px;
-		background: linear-gradient(135deg, var(--light-purple), var(--light-blue));
-		display: flex;
-		align-items: center;
-		min-height: 100vh;
-	}
+  .hero {
+    padding-top: clamp(3rem, 8vw, 5rem);
+  }
 
-	.hero-content {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 20px;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
-		align-items: center;
-	}
+  .hero-grid {
+    display: grid;
+    gap: var(--space-7);
+    align-items: center;
+    grid-template-columns: 1.1fr 1fr;
+  }
 
-	.hero-title {
-		font-family: 'Dancing Script', cursive;
-		font-size: 4rem;
-		font-weight: 700;
-		background: var(--gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		margin-bottom: 0.5rem;
-	}
+  .hero-copy h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.04;
+    max-width: 20ch;
+  }
 
-	.hero-subtitle {
-		font-size: 1.5rem;
-		color: var(--primary-purple);
-		margin-bottom: 1rem;
-		font-weight: 500;
-	}
+  .hero-copy p {
+    margin-top: var(--space-4);
+    max-width: 60ch;
+    color: var(--text-muted);
+  }
 
-	.hero-description {
-		font-size: 1.1rem;
-		color: var(--black);
-		margin-bottom: 2rem;
-		line-height: 1.8;
-	}
+  .hero-actions {
+    margin-top: var(--space-6);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
 
-	.cta-button {
-		display: inline-block;
-		background: var(--gradient);
-		color: white;
-		padding: 1rem 2rem;
-		text-decoration: none;
-		border-radius: 50px;
-		font-weight: 600;
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-		box-shadow: 0 4px 15px rgba(246, 83, 166, 0.3);
-	}
+  .hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: clip;
+    box-shadow: var(--shadow-lg);
+  }
 
-	.cta-button:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 25px rgba(246, 83, 166, 0.4);
-	}
+  .hero-image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
 
-	.hero-image {
-		position: relative;
-	}
+  .hero-badge {
+    position: absolute;
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: var(--space-4);
+    background: var(--overlay-deep);
+    color: var(--text-inverse);
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    text-align: center;
+  }
 
-	.hero-image img {
-		width: 100%;
-		height: 400px;
-		object-fit: cover;
-		border-radius: 20px;
-		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-	}
+  @media (max-width: 52rem) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
 
-	/* Mobile Responsive */
-	@media (max-width: 768px) {
-		.hero {
-			padding: 100px 0 60px;
-			min-height: auto;
-		}
-
-		.hero-content {
-			grid-template-columns: 1fr;
-			text-align: center;
-			gap: 2.5rem;
-			padding: 0 1.5rem;
-		}
-
-		.hero-title {
-			font-size: 3rem;
-			margin-bottom: 0.75rem;
-		}
-
-		.hero-subtitle {
-			font-size: 1.3rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.hero-description {
-			font-size: 1rem;
-			margin-bottom: 2.5rem;
-			max-width: 500px;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.hero-image img {
-			height: 280px;
-			border-radius: 15px;
-		}
-
-		.cta-button {
-			padding: 1.2rem 2.5rem;
-			font-size: 1.1rem;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.hero {
-			padding: 90px 0 50px;
-		}
-
-		.hero-content {
-			gap: 2rem;
-			padding: 0 1rem;
-		}
-
-		.hero-title {
-			font-size: 2.5rem;
-			line-height: 1.1;
-		}
-
-		.hero-subtitle {
-			font-size: 1.2rem;
-		}
-
-		.hero-description {
-			font-size: 0.95rem;
-			margin-bottom: 2rem;
-		}
-
-		.hero-image img {
-			height: 220px;
-			border-radius: 12px;
-		}
-
-		.cta-button {
-			padding: 1rem 2rem;
-			font-size: 1rem;
-		}
-	}
-
-	@media (max-width: 360px) {
-		.hero-content {
-			padding: 0 0.75rem;
-		}
-
-		.hero-title {
-			font-size: 2.2rem;
-		}
-
-		.hero-image img {
-			height: 200px;
-		}
-	}
-</style> 
+    .hero-copy h1 {
+      max-width: none;
+    }
+  }
+</style>

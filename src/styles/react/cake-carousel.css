@@ -1,0 +1,82 @@
+.cake-carousel {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.cake-carousel__viewport {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  background: var(--bg-surface);
+}
+
+.cake-carousel__viewport:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.cake-carousel__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: 0;
+}
+
+.cake-carousel__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 100%;
+  min-width: 0;
+  margin: 0;
+  background: var(--accent-soft);
+  padding: clamp(0.65rem, 1.5vw, 1rem);
+}
+
+.cake-carousel__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 10%, var(--accent-primary-soft), transparent 56%),
+    linear-gradient(160deg, var(--bg-surface), var(--accent-soft));
+}
+
+.cake-carousel__slide img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.cake-carousel__controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.cake-carousel__dots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.cake-carousel__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-soft);
+  background: transparent;
+  cursor: pointer;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.cake-carousel__dot.is-active {
+  background: var(--accent-primary);
+  transform: scale(1.1);
+}

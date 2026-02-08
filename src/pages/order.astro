@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import OrderFormIsland from '../components/react/OrderFormIsland';
+import { isOrderFormEnabled } from '../lib/config/env';
+import { orderValidationRules } from '../lib/order/schema';
+
+const orderFormEnabled = isOrderFormEnabled();
+---
+
+<BaseLayout
+  title="Order a Custom Cake | Dillz Bites"
+  description="Submit your custom cake request with size, style, and event details. Dillz Bites will confirm by email."
+  canonicalPath="/order"
+>
+  <Navigation currentPath="/order" />
+  <main id="main-content" class="section">
+    <div class="container order-shell">
+      <header data-reveal>
+        <p class="eyebrow">Order Form</p>
+        <h1 class="section-title">Start your custom cake request</h1>
+        <p class="section-intro">
+          Share the event details, flavor direction, and design notes. We require a minimum lead time of
+          {orderValidationRules.minimumLeadDays} days for custom cakes.
+        </p>
+      </header>
+
+      {
+        orderFormEnabled ? (
+          <div data-reveal>
+            <OrderFormIsland client:load minimumLeadDays={orderValidationRules.minimumLeadDays} />
+          </div>
+        ) : (
+          <section class="order-disabled" data-reveal>
+            <h2>Order form temporarily unavailable</h2>
+            <p>
+              Please email <a href="mailto:orders@dillzbites.com">orders@dillzbites.com</a> with your event date,
+              cake size, and design notes.
+            </p>
+          </section>
+        )
+      }
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .order-shell {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .order-disabled {
+    border: 1px solid var(--border-soft);
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+  }
+
+  .order-disabled h2 {
+    margin: 0;
+    font-family: var(--font-display);
+  }
+
+  .order-disabled p {
+    margin: var(--space-3) 0 0;
+    color: var(--text-muted);
+  }
+
+  .order-disabled a {
+    color: var(--accent-primary);
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>

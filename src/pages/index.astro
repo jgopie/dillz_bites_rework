@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../components/BaseLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
 import Gallery from '../components/Gallery.astro';
@@ -8,11 +8,17 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout title="Dillz Bites - Artisan Bakery">
-	<Navigation />
-	<Hero />
-	<Gallery />
-	<About />
-	<Contact />
-	<Footer />
+<BaseLayout
+  title="Dillz Bites | Bespoke Cakes for Every Celebration"
+  description="Dillz Bites designs and bakes bespoke cakes for birthdays, weddings, and every special occasion."
+  canonicalPath="/"
+>
+  <Navigation currentPath="/" />
+  <main id="main-content">
+    <Hero />
+    <Gallery />
+    <About />
+    <Contact />
+  </main>
+  <Footer />
 </BaseLayout>
