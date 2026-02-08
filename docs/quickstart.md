@@ -4,7 +4,7 @@
 
 - Node.js 20+
 - npm 10+
-- Resend API key for live email testing
+- SMTP credentials for live email testing
 
 ## Install
 
@@ -22,7 +22,7 @@ cp .env.example .env
 
 Minimum required for order API:
 
-- `RESEND_API_KEY`
+- `SMTP_URL`
 - `ORDER_NOTIFICATION_EMAIL`
 - `ORDER_FROM_EMAIL`
 

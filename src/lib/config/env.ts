@@ -34,11 +34,13 @@ export function getRateLimitConfig() {
 }
 
 export function getOrderEmailConfig() {
+  // Email delivery configuration is server-only and should come from runtime env.
+  // Using process.env keeps secrets out of Vite's import.meta.env exposure model.
   return {
-    apiKey: import.meta.env.RESEND_API_KEY,
-    fromEmail: import.meta.env.ORDER_FROM_EMAIL ?? 'Dillz Bites <orders@dillzbites.com>',
-    notificationEmail: import.meta.env.ORDER_NOTIFICATION_EMAIL ?? 'orders@dillzbites.com',
+    smtpUrl: process.env.SMTP_URL,
+    fromEmail: process.env.ORDER_FROM_EMAIL ?? 'Dillz Bites <orders@dillzbites.com>',
+    notificationEmail: process.env.ORDER_NOTIFICATION_EMAIL ?? 'orders@dillzbites.com',
     replyToEmail:
-      import.meta.env.BUSINESS_REPLY_TO_EMAIL ?? import.meta.env.ORDER_NOTIFICATION_EMAIL ?? 'orders@dillzbites.com'
+      process.env.BUSINESS_REPLY_TO_EMAIL ?? process.env.ORDER_NOTIFICATION_EMAIL ?? 'orders@dillzbites.com'
   };
 }

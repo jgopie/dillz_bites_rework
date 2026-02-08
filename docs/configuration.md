@@ -4,7 +4,7 @@
 
 | Variable | Required | Default | Purpose |
 | --- | --- | --- | --- |
-| `RESEND_API_KEY` | Yes (prod) | none | Auth token for Resend email API |
+| `SMTP_URL` | Yes (prod) | none | SMTP connection string used for sending order emails |
 | `ORDER_NOTIFICATION_EMAIL` | No | `orders@dillzbites.com` | Internal inbox for new order notifications |
 | `ORDER_FROM_EMAIL` | No | `Dillz Bites <orders@dillzbites.com>` | Sender identity for both outgoing emails |
 | `BUSINESS_REPLY_TO_EMAIL` | No | `orders@dillzbites.com` | Reply-to address used in customer confirmations |
@@ -15,5 +15,5 @@
 ## Notes
 
 - In production, set `ENABLE_ORDER_FORM=true` after deployment verification.
-- `ORDER_FROM_EMAIL` should use a verified sender/domain in Resend.
+- `ORDER_FROM_EMAIL` should use a sender identity allowed by your SMTP provider.
 - Keep secrets in hosting provider environment settings, never in git.

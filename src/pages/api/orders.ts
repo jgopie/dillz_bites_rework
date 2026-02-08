@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { sendOrderEmails } from '../../lib/email/resend';
+import { sendOrderEmails } from '../../lib/email/smtp';
 import { isOrderFormEnabled } from '../../lib/config/env';
 import { prepareOrderForDelivery } from '../../lib/order/service';
 import type { OrderApiError, OrderApiSuccess, OrderFormInput } from '../../lib/order/schema';

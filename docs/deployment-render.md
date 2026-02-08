@@ -18,7 +18,7 @@ The site is deployed as a Render Web Service running Astro server output.
 
 Set the following variables in Render dashboard or via `render.yaml`:
 
-- `RESEND_API_KEY` (required)
+- `SMTP_URL` (required)
 - `ORDER_NOTIFICATION_EMAIL`
 - `ORDER_FROM_EMAIL`
 - `BUSINESS_REPLY_TO_EMAIL`

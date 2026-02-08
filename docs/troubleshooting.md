@@ -4,8 +4,8 @@
 
 Checks:
 
-1. Confirm `RESEND_API_KEY` is set in runtime env.
-2. Confirm `ORDER_FROM_EMAIL` uses a verified sender/domain in Resend.
+1. Confirm `SMTP_URL` is set in runtime env.
+2. Confirm `ORDER_FROM_EMAIL` is allowed by your SMTP provider.
 3. Check server logs for `[orders] Internal order email failed`.
 
 ## API returns `ORDER_FORM_DISABLED`

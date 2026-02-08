@@ -12,7 +12,7 @@ The site is built with Astro and includes a server-rendered order API that valid
 - Astro React integration (`@astrojs/react`) for interactive islands
 - Embla carousel (`embla-carousel-react`)
 - Radix Themes (`@radix-ui/themes`)
-- Resend for transactional email delivery
+- SMTP email delivery via Nodemailer
 - Zod for request validation
 - Vitest for unit and endpoint tests
 

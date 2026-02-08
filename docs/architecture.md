@@ -26,7 +26,7 @@
 2. Browser sends JSON payload to `POST /api/orders`.
 3. Endpoint validates payload using `zod` schema and lead-time rule.
 4. Honeypot and IP rate limiter filter abuse.
-5. Internal and customer emails are sent via Resend.
+5. Internal and customer emails are sent via SMTP.
 6. API returns `requestId` and status message to the client.
 
 ## Key source files
@@ -34,7 +34,7 @@
 - `src/pages/api/orders.ts` - API endpoint and orchestration
 - `src/lib/order/schema.ts` - canonical validation/types
 - `src/lib/order/service.ts` - request ID + email payload composition
-- `src/lib/email/resend.ts` - provider integration
+- `src/lib/email/smtp.ts` - SMTP provider integration
 - `src/lib/security/rate-limit.ts` - fixed-window in-memory limiter
 - `src/lib/config/env.ts` - env parsing and defaults
 

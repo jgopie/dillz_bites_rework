@@ -3,7 +3,7 @@
 ## Secrets handling
 
 - Never commit real API keys to git.
-- Store `RESEND_API_KEY` only in deployment provider secret management.
+- Store `SMTP_URL` only in deployment provider secret management.
 - Use `.env.example` for placeholder defaults only.
 
 ## Abuse controls

@@ -9,7 +9,7 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 20
-      - key: RESEND_API_KEY
+      - key: SMTP_URL
         sync: false
       - key: ORDER_NOTIFICATION_EMAIL
         value: orders@dillzbites.com
