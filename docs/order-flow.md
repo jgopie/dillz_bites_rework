@@ -71,6 +71,4 @@ Other possible error codes:
 For valid requests:
 
 1. Internal notification is sent to `ORDER_NOTIFICATION_EMAIL`.
-2. Customer confirmation is sent to the submitted customer email.
-3. If internal email fails: request fails with `502`.
-4. If customer email fails but internal succeeds: request still succeeds and a warning is logged.
+2. If internal email fails: request fails with `502`.

@@ -3,7 +3,7 @@
 Dillz Bites is a marketing and ordering website for a sole proprietor baker specializing in bespoke cakes.
 The site is built with Astro and includes a server-rendered order API that validates requests and sends two emails:
 1. Internal notification to the bakery inbox.
-2. Customer confirmation email with request reference ID.
+2. A follow-up is handled manually after the request is received.
 
 ## Tech stack
 

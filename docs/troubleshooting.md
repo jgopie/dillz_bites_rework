@@ -31,13 +31,3 @@ Cause:
 Fix:
 
 - Choose a date at least 3 calendar days ahead.
-
-## Customer did not receive confirmation email
-
-If internal notification was delivered, customer send failures do not fail API response.
-
-Checks:
-
-1. Confirm customer email address was entered correctly.
-2. Check logs for warning: `Customer confirmation failed`.
-3. Ask customer to check spam/junk folder.

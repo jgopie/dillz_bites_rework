@@ -52,31 +52,14 @@ describe('sendOrderEmails (SMTP)', () => {
     expect(sendMail).toHaveBeenCalledTimes(1);
   });
 
-  it('returns success when customer confirmation fails but internal email succeeds', async () => {
-    const sendMail = vi
-      .fn()
-      .mockResolvedValueOnce({ messageId: '<internal@id>' })
-      .mockRejectedValueOnce(new Error('invalid recipient'));
-    (nodemailer.createTransport as any).mockReturnValue({ sendMail });
-
-    const result = await sendOrderEmails(payload());
-    expect(result.internalEmailId).toBe('<internal@id>');
-    expect(result.customerEmailId).toBeUndefined();
-    expect(result.customerSendError).toContain('invalid recipient');
-    expect(sendMail).toHaveBeenCalledTimes(2);
-  });
-
-  it('returns email ids when both internal and customer emails succeed', async () => {
-    const sendMail = vi.fn().mockResolvedValueOnce({ messageId: '<internal@id>' }).mockResolvedValueOnce({
-      messageId: '<customer@id>'
-    });
+  it('returns internal email id when internal email succeeds', async () => {
+    const sendMail = vi.fn().mockResolvedValueOnce({ messageId: '<internal@id>' });
     (nodemailer.createTransport as any).mockReturnValue({ sendMail });
 
     const result = await sendOrderEmails(payload());
     expect(result).toEqual({
-      internalEmailId: '<internal@id>',
-      customerEmailId: '<customer@id>'
+      internalEmailId: '<internal@id>'
     });
-    expect(sendMail).toHaveBeenCalledTimes(2);
+    expect(sendMail).toHaveBeenCalledTimes(1);
   });
 });

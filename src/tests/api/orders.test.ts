@@ -97,17 +97,4 @@ describe('POST /api/orders', () => {
     const data = await response.json();
     expect(data.code).toBe('EMAIL_DELIVERY_FAILED');
   });
-
-  it('returns success when customer confirmation fails but internal email succeeds', async () => {
-    const response = await handleOrderPost(jsonRequest(validPayload), '127.0.0.1', {
-      enabled: () => true,
-      checkLimit: () => ({ allowed: true, remaining: 4, retryAfterSeconds: 0 }),
-      sendEmails: vi.fn().mockResolvedValue({ customerSendError: 'invalid recipient' }),
-      now: () => new Date('2026-02-07T10:00:00Z')
-    });
-
-    expect(response.status).toBe(200);
-    const data = await response.json();
-    expect(data.ok).toBe(true);
-  });
 });

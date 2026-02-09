@@ -15,14 +15,6 @@ export interface EmailSendResult {
   customerSendError?: string;
 }
 
-function getErrorMessage(error: unknown): string {
-  if (error && typeof error === 'object' && 'message' in error && typeof (error as any).message === 'string') {
-    return (error as any).message as string;
-  }
-
-  return 'Unknown error';
-}
-
 export async function sendOrderEmails(payload: OrderEmailPayload): Promise<EmailSendResult> {
   const config = getOrderEmailConfig();
 
@@ -54,27 +46,7 @@ export async function sendOrderEmails(payload: OrderEmailPayload): Promise<Email
   const internalEmailId =
     internalInfo && typeof internalInfo.messageId === 'string' ? (internalInfo.messageId as string) : undefined;
 
-  let customerInfo: any;
-  try {
-    customerInfo = await transport.sendMail({
-      from: config.fromEmail,
-      to: payload.customerEmail,
-      replyTo: config.replyToEmail,
-      subject: payload.customerSubject,
-      text: payload.customerText
-    });
-  } catch (error) {
-    return {
-      internalEmailId,
-      customerSendError: getErrorMessage(error)
-    };
-  }
-
-  const customerEmailId =
-    customerInfo && typeof customerInfo.messageId === 'string' ? (customerInfo.messageId as string) : undefined;
-
   return {
-    internalEmailId,
-    customerEmailId
+    internalEmailId
   };
 }

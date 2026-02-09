@@ -130,12 +130,6 @@ export async function handleOrderPost(
   try {
     const emailResult = await deps.sendEmails(prepared.data.emailPayload);
 
-    if (emailResult.customerSendError) {
-      console.warn(
-        `[orders] Customer confirmation failed for ${prepared.data.requestId}: ${emailResult.customerSendError}`
-      );
-    }
-
     return json({
       ok: true,
       requestId: prepared.data.requestId,

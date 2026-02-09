@@ -26,7 +26,7 @@
 2. Browser sends JSON payload to `POST /api/orders`.
 3. Endpoint validates payload using `zod` schema and lead-time rule.
 4. Honeypot and IP rate limiter filter abuse.
-5. Internal and customer emails are sent via SMTP.
+5. An internal notification email is sent via SMTP.
 6. API returns `requestId` and status message to the client.
 
 ## Key source files
@@ -42,5 +42,5 @@
 
 - Rate limiter is in-memory and instance-local. Horizontal scaling means per-instance limits.
 - No order database means order history depends on inbox retention.
-- Customer confirmation failures are logged but do not fail successful internal notification requests.
+- No automatic customer confirmation is sent; follow-up is handled manually.
 - Tests must not live under `src/pages/**` to avoid accidental route exposure.

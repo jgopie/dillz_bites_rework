@@ -416,7 +416,7 @@ export default function OrderFormIsland({ minimumLeadDays, endpoint = '/api/orde
               {status === 'submitting' ? 'Sending request...' : 'Send order request'}
             </Button>
             <Text size="2" color="gray">
-              You will receive a confirmation email after successful submission.
+              We'll review your request and contact you within 1 business day.
             </Text>
           </Flex>
 
