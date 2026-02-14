@@ -4,43 +4,39 @@
 
 - Astro app running in `output: server` mode with `@astrojs/node` adapter.
 - Render hosts the Node server process.
-- Astro is the shell framework; React is used as targeted islands for interactive UI.
-- No database in v1; email delivery is the persistence channel.
+- Astro is the shell framework; React is used only for targeted interactivity (gallery carousel).
+- No backend order-processing pipeline is active.
 
 ## UI architecture
 
 - Astro layout/pages:
   - `src/layouts/BaseLayout.astro`
   - `src/pages/index.astro`
-  - `src/pages/order.astro`
+  - `src/pages/order.astro` (repurposed to WhatsApp guidance + CTA)
 - React islands:
-  - `src/components/react/CakeCarousel.tsx` (Embla carousel)
-  - `src/components/react/OrderFormIsland.tsx` (Radix Themes form controls)
-- Shared UI data/types:
-  - `src/components/react/carousel-slides.ts`
-  - `src/components/react/order-form.types.ts`
+  - `src/components/react/CakeCarousel.tsx`
+- Shared contact config:
+  - `src/lib/config/contact.ts`
 
-## High-level flow
+## High-level conversion flow
 
-1. User visits `/order` and submits form through the React order island.
-2. Browser sends JSON payload to `POST /api/orders`.
-3. Endpoint validates payload using `zod` schema and lead-time rule.
-4. Honeypot and IP rate limiter filter abuse.
-5. An internal notification email is sent via SMTP.
-6. API returns `requestId` and status message to the client.
+1. User clicks a primary CTA (hero, contact section, nav/footer, floating button).
+2. CTA opens prefilled WhatsApp chat via `WHATSAPP_URL`.
+3. `/order` page provides a message checklist and the same WhatsApp CTA.
+4. Legacy API route `/api/orders` returns `410 Gone` for backward compatibility.
 
 ## Key source files
 
-- `src/pages/api/orders.ts` - API endpoint and orchestration
-- `src/lib/order/schema.ts` - canonical validation/types
-- `src/lib/order/service.ts` - request ID + email payload composition
-- `src/lib/email/smtp.ts` - SMTP provider integration
-- `src/lib/security/rate-limit.ts` - fixed-window in-memory limiter
-- `src/lib/config/env.ts` - env parsing and defaults
+- `src/lib/config/contact.ts` - phone/email/WhatsApp source of truth
+- `src/components/Hero.astro` - primary homepage WhatsApp CTA
+- `src/components/Contact.astro` - WhatsApp-first contact grid/actions
+- `src/components/Navigation.astro` - global WhatsApp nav link
+- `src/components/Footer.astro` - global WhatsApp footer link
+- `src/components/WhatsAppFloat.astro` - floating WhatsApp CTA
+- `src/pages/api/orders.ts` - deprecated endpoint (`410 Gone`)
 
 ## Constraints
 
-- Rate limiter is in-memory and instance-local. Horizontal scaling means per-instance limits.
-- No order database means order history depends on inbox retention.
-- No automatic customer confirmation is sent; follow-up is handled manually.
-- Tests must not live under `src/pages/**` to avoid accidental route exposure.
+- Contact/business values should be updated centrally in `src/lib/config/contact.ts`.
+- External WhatsApp links must use `target="_blank"` and `rel="noopener noreferrer"`.
+- `/api/orders` should remain non-functional unless a future backend order system is intentionally reintroduced.

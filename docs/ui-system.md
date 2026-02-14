@@ -31,9 +31,9 @@ Global usage patterns live in:
 ## Component stacks
 
 - Astro components for structural sections (hero/about/contact/footer/nav).
+- Astro components for conversion CTAs (including WhatsApp-first actions and floating button).
 - React islands for interactive widgets:
   - Carousel: `src/components/react/CakeCarousel.tsx`
-  - Order form controls: `src/components/react/OrderFormIsland.tsx`
 
 Carousel images are prepared server-side in `src/components/Gallery.astro` using `getImage` and rendered as responsive `<picture>` sources in the React island.
 
@@ -41,5 +41,4 @@ Carousel images are prepared server-side in `src/components/Gallery.astro` using
 
 - Focus indicators use `--focus-ring` and must remain visible on all surfaces.
 - Keep semantic heading hierarchy in Astro pages.
-- Keep label-to-field relationships intact in React form controls.
 - Preserve contrast at AA minimum for body text and key controls.

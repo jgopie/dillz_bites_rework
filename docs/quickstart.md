@@ -4,7 +4,6 @@
 
 - Node.js 20+
 - npm 10+
-- SMTP credentials for live email testing
 
 ## Install
 
@@ -12,19 +11,13 @@
 npm ci
 ```
 
-## Configure environment
+## Optional environment file
 
-Copy `.env.example` to `.env` and fill required values.
+Copy `.env.example` to `.env` only if you need local custom variables for future features.
 
 ```bash
 cp .env.example .env
 ```
-
-Minimum required for order API:
-
-- `SMTP_URL`
-- `ORDER_NOTIFICATION_EMAIL`
-- `ORDER_FROM_EMAIL`
 
 ## Run locally
 
@@ -57,4 +50,3 @@ node ./dist/server/entry.mjs
 - Astro pages/layouts for shell rendering
 - React islands via `@astrojs/react`
 - Embla (`embla-carousel-react`) for gallery carousel
-- Radix Themes (`@radix-ui/themes`) for order form controls

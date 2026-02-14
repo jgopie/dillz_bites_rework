@@ -1,33 +1,33 @@
 # Troubleshooting
 
-## API returns `EMAIL_DELIVERY_FAILED`
+## WhatsApp CTA opens with missing/incorrect message
 
 Checks:
 
-1. Confirm `SMTP_URL` is set in runtime env.
-2. Confirm `ORDER_FROM_EMAIL` is allowed by your SMTP provider.
-3. Check server logs for `[orders] Internal order email failed`.
+1. Verify `WHATSAPP_PREFILL` in `src/lib/config/contact.ts`.
+2. Verify `WHATSAPP_URL` is built with `encodeURIComponent`.
+3. Rebuild and reload the site after changes.
 
-## API returns `ORDER_FORM_DISABLED`
-
-Checks:
-
-1. Set `ENABLE_ORDER_FORM=true` in production env.
-2. Redeploy or restart service after updating environment variables.
-
-## API returns `RATE_LIMITED`
+## WhatsApp link does not open in a new tab
 
 Checks:
 
-1. Wait for current rate-limit window to reset.
-2. Adjust `RATE_LIMIT_MAX` and `RATE_LIMIT_WINDOW_MS` if limits are too strict.
+1. Verify CTA links include `target="_blank"`.
+2. Verify CTA links include `rel="noopener noreferrer"`.
 
-## Form validation errors for event date
+## Customer still calling deprecated API route
 
-Cause:
+Expected behavior:
 
-- Event date is less than 3 days from current date.
+- `GET /api/orders` and `POST /api/orders` return `410 Gone`.
 
-Fix:
+Action:
 
-- Choose a date at least 3 calendar days ahead.
+1. Update any old frontend integrations/bookmarks to use WhatsApp CTAs.
+
+## Contact info appears inconsistent across sections
+
+Checks:
+
+1. Confirm values in `src/lib/config/contact.ts`.
+2. Confirm components import and use those constants directly.

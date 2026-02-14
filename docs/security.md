@@ -3,33 +3,25 @@
 ## Secrets handling
 
 - Never commit real API keys to git.
-- Store `SMTP_URL` only in deployment provider secret management.
 - Use `.env.example` for placeholder defaults only.
 
-## Abuse controls
+## External link safety
 
-- Honeypot field (`website`) to catch basic bots.
-- IP-based fixed-window rate limit at API layer.
+- WhatsApp links that open in a new tab must use `rel="noopener noreferrer"`.
+- Keep `WHATSAPP_URL` centralized in `src/lib/config/contact.ts` to avoid drift or malformed links.
 
 ## Data handling
 
-- No database persistence in v1.
-- Order details are transmitted over HTTPS and forwarded by email.
-- Avoid adding highly sensitive customer data to form fields.
-
-## Input validation
-
-- All order payloads are validated server-side with Zod.
-- URL fields are validated as URL format.
-- Minimum lead-time policy enforced in API regardless of client behavior.
+- No order form payloads are processed server-side.
+- No SMTP delivery pipeline is active.
+- Legacy route `/api/orders` is intentionally non-functional and returns `410 Gone`.
 
 ## Logging
 
-- Endpoint logs operational failures and warnings.
-- Logs should not include API keys or full sensitive payload dumps.
+- Logs should not include secrets or sensitive user content.
 
 ## Future hardening options
 
-1. Add CAPTCHA/Turnstile for stronger bot protection.
-2. Add durable queue + data store for auditability and retries.
-3. Add per-route monitoring/alerting for email delivery errors.
+1. Add analytics events for WhatsApp CTA click monitoring.
+2. Add CSP refinements for stricter external-link policies.
+3. Add link integrity tests to validate `WHATSAPP_URL` formatting in CI.

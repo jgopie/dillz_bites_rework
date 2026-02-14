@@ -9,17 +9,3 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 20
-      - key: SMTP_URL
-        sync: false
-      - key: ORDER_NOTIFICATION_EMAIL
-        value: orders@dillzbites.com
-      - key: ORDER_FROM_EMAIL
-        value: Dillz Bites <orders@dillzbites.com>
-      - key: BUSINESS_REPLY_TO_EMAIL
-        value: orders@dillzbites.com
-      - key: RATE_LIMIT_MAX
-        value: "5"
-      - key: RATE_LIMIT_WINDOW_MS
-        value: "900000"
-      - key: ENABLE_ORDER_FORM
-        value: "true"

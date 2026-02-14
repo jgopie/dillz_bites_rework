@@ -2,18 +2,24 @@
 
 ## Environment variables
 
-| Variable | Required | Default | Purpose |
-| --- | --- | --- | --- |
-| `SMTP_URL` | Yes (prod) | none | SMTP connection string used for sending order emails |
-| `ORDER_NOTIFICATION_EMAIL` | No | `orders@dillzbites.com` | Internal inbox for new order notifications |
-| `ORDER_FROM_EMAIL` | No | `Dillz Bites <orders@dillzbites.com>` | Sender identity for both outgoing emails |
-| `BUSINESS_REPLY_TO_EMAIL` | No | `orders@dillzbites.com` | Reply-to address used when responding to customers |
-| `ENABLE_ORDER_FORM` | No | `true` non-prod, `false` prod | Feature flag for `/order` page and `/api/orders` endpoint |
-| `RATE_LIMIT_MAX` | No | `5` | Max order submissions per IP in window |
-| `RATE_LIMIT_WINDOW_MS` | No | `900000` | Rate-limit window (15 minutes by default) |
+No environment variables are currently required for the WhatsApp-first contact flow.
+
+## Contact source of truth
+
+Business contact and WhatsApp CTA values are centralized in:
+
+- `src/lib/config/contact.ts`
+
+Exports:
+
+- `BUSINESS_PHONE_DISPLAY`
+- `BUSINESS_PHONE_TEL`
+- `BUSINESS_EMAIL`
+- `WHATSAPP_NUMBER`
+- `WHATSAPP_PREFILL`
+- `WHATSAPP_URL`
 
 ## Notes
 
-- In production, set `ENABLE_ORDER_FORM=true` after deployment verification.
-- `ORDER_FROM_EMAIL` should use a sender identity allowed by your SMTP provider.
-- Keep secrets in hosting provider environment settings, never in git.
+- Update contact details only in `src/lib/config/contact.ts` to keep all CTAs synchronized.
+- Keep secrets out of git if new runtime config is introduced later.

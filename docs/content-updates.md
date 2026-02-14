@@ -8,6 +8,7 @@ Primary marketing text lives in:
 - `src/components/About.astro`
 - `src/components/Contact.astro`
 - `src/components/Footer.astro`
+- `src/pages/order.astro`
 
 ## Updating cake images
 
@@ -38,20 +39,10 @@ For design/layout refinements, update:
 
 Current fit behavior is intentionally `object-fit: contain` so each full cake image remains visible without cropping.
 
-## Contact details
+## Contact details and WhatsApp message
 
-Update phone/email references in:
+Update all business contact and WhatsApp values in:
 
-- `src/components/Contact.astro`
-- `src/components/Footer.astro` (if needed)
-- `src/lib/config/env.ts` default fallback email values (if business inbox changes)
+- `src/lib/config/contact.ts`
 
-## Order options
-
-Order field options and submit behavior live in:
-
-- `src/components/react/OrderFormIsland.tsx`
-
-Order payload/validation contracts are enforced in:
-
-- `src/lib/order/schema.ts`
+This keeps hero/contact/nav/footer/order-page/floating-button CTAs synchronized.

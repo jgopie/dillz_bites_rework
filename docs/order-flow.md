@@ -1,74 +1,35 @@
 # Order Flow
 
-## Endpoint
+## Primary conversion channel
 
-- Method: `POST`
+- Channel: WhatsApp
+- Link source: `src/lib/config/contact.ts` (`WHATSAPP_URL`)
+- Message source: `WHATSAPP_PREFILL` (URL-encoded into `WHATSAPP_URL`)
+
+## Customer path
+
+1. User clicks a WhatsApp CTA (hero, contact section, nav, footer, floating button, or `/order` page).
+2. WhatsApp opens with prefilled message template.
+3. Bakery continues intake and confirmation directly in chat.
+
+## `/order` page behavior
+
+- Path: `/order`
+- Purpose: WhatsApp-first order instructions and checklist.
+- No form submission is available on this page.
+
+## Legacy API behavior
+
 - Path: `/api/orders`
-- Content-Type: `application/json`
+- Methods: `GET`, `POST`
+- Status: `410 Gone`
 
-## Request payload
-
-```json
-{
-  "name": "string",
-  "email": "string",
-  "phone": "string (optional)",
-  "eventDate": "YYYY-MM-DD",
-  "occasion": "string",
-  "cakeType": "string",
-  "cakeSize": "string",
-  "servings": 24,
-  "flavor": "string (optional)",
-  "designNotes": "string",
-  "budget": "string",
-  "fulfillmentType": "pickup | delivery",
-  "allergies": "string (optional)",
-  "referenceUrls": ["https://..."],
-  "consent": true,
-  "website": ""
-}
-```
-
-## Validation rules
-
-- `eventDate` must be at least 3 days after submission date.
-- Required fields: `name`, `email`, `eventDate`, `occasion`, `cakeType`, `cakeSize`, `servings`, `designNotes`, `budget`, `fulfillmentType`, `consent`.
-- `referenceUrls` must be valid URLs.
-- Honeypot field `website` must be empty.
-
-## Success response
-
-```json
-{
-  "ok": true,
-  "requestId": "DB-20260207-AB12",
-  "message": "Thanks for your order request. We will contact you soon."
-}
-```
-
-## Error response
+Response body:
 
 ```json
 {
   "ok": false,
-  "code": "VALIDATION_ERROR",
-  "message": "Please review your order details and try again.",
-  "fieldErrors": {
-    "eventDate": "Please choose a date at least 3 days from today."
-  }
+  "code": "ORDER_FLOW_REMOVED",
+  "message": "Order submissions are no longer accepted on this endpoint. Please use WhatsApp instead."
 }
 ```
-
-Other possible error codes:
-
-- `ORDER_FORM_DISABLED` (`503`)
-- `INVALID_JSON` (`400`)
-- `RATE_LIMITED` (`429`)
-- `EMAIL_DELIVERY_FAILED` (`502`)
-
-## Email behavior
-
-For valid requests:
-
-1. Internal notification is sent to `ORDER_NOTIFICATION_EMAIL`.
-2. If internal email fails: request fails with `502`.
