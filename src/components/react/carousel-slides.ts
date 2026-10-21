@@ -13,11 +13,13 @@ export interface CarouselSlideSource {
   id: string;
   image: ImageMetadata;
   alt: string;
+  caption: string;
 }
 
 export interface OptimizedCarouselSlide {
   id: string;
   alt: string;
+  caption: string;
   fallbackSrc: string;
   fallbackSrcSet: string;
   webpSrcSet: string;
@@ -26,17 +28,62 @@ export interface OptimizedCarouselSlide {
   height: number;
 }
 
-export const carouselImageWidths = [420, 640, 860, 1080, 1320] as const;
-export const carouselImageSizes = '(max-width: 52rem) 92vw, (max-width: 72rem) 78vw, 860px';
+export const carouselImageWidths = [320, 480, 640, 860] as const;
+export const carouselImageSizes = '(max-width: 40rem) 80vw, (max-width: 64rem) 45vw, 24rem';
 
 export const cakeCarouselSlides: CarouselSlideSource[] = [
-  { id: 'cake-1', image: cake1, alt: 'Two-tier celebration cake with fresh floral accents' },
-  { id: 'cake-2', image: cake2, alt: 'Chocolate drip cake with textured buttercream finish' },
-  { id: 'cake-3', image: cake3, alt: 'Bold custom cake with colorful decorative piping' },
-  { id: 'cake-4', image: cake4, alt: 'Tall wedding cake with elegant white floral details' },
-  { id: 'cake-5', image: cake5, alt: 'Birthday cake featuring soft peach and cream palette' },
-  { id: 'cake-6', image: cake6, alt: 'Custom themed cake with hand-sculpted fondant pieces' },
-  { id: 'cake-7', image: cake7, alt: 'Modern artisan cake with minimalist geometric style' },
-  { id: 'cake-8', image: cake8, alt: 'Statement cake with metallic finishing details' },
-  { id: 'cake-9', image: cake9, alt: 'Special occasion cake with layered textures and flowers' }
+  {
+    id: 'cake-1',
+    image: cake1,
+    caption: 'Rosette number cake',
+    alt: 'Number one birthday cake piped with peach and cream rosettes and gold pearls, beside a small heart cake'
+  },
+  {
+    id: 'cake-8',
+    image: cake8,
+    caption: 'Chelsea FC drip cake',
+    alt: 'Royal blue drip cake with Chelsea FC badges, footballs and a gold Happy Birthday topper'
+  },
+  {
+    id: 'cake-5',
+    image: cake5,
+    caption: 'Golden Girls party',
+    alt: 'Two-tier pink and cream Golden Girls themed cake with tropical leaves and character figurines'
+  },
+  {
+    id: 'cake-9',
+    image: cake9,
+    caption: 'Chocolate overload',
+    alt: 'Chocolate drip cake piled with chocolate doughnuts and chocolate bars on a gold board'
+  },
+  {
+    id: 'cake-7',
+    image: cake7,
+    caption: 'Bikini Bottom 25th',
+    alt: "Teal SpongeBob themed 25th birthday cake reading \"What's funnier than 24\" with a sandy top"
+  },
+  {
+    id: 'cake-4',
+    image: cake4,
+    caption: 'Bridal shower, two tiers',
+    alt: 'Two-tier bridal shower cake with an illustrated couple, pink buttercream ruffles and a "So it begins" topper'
+  },
+  {
+    id: 'cake-3',
+    image: cake3,
+    caption: 'Cookies and cream',
+    alt: 'Cookies and cream cake ringed with chocolate buttercream swirls and a gold Happy Birthday plaque'
+  },
+  {
+    id: 'cake-6',
+    image: cake6,
+    caption: 'Bride to be',
+    alt: 'Bride to Be cake with an illustrated bride in gold jewellery, a red rose and sunflowers'
+  },
+  {
+    id: 'cake-2',
+    image: cake2,
+    caption: 'Layered cake cups',
+    alt: "Clear cake cup layered with sponge and berry filling, topped with a wooden tag and baby's breath"
+  }
 ];

@@ -1,35 +1,20 @@
 # Order Flow
 
-## Primary conversion channel
+## Channel
 
-- Channel: WhatsApp
-- Link source: `src/lib/config/contact.ts` (`WHATSAPP_URL`)
-- Message source: `WHATSAPP_PREFILL` (URL-encoded into `WHATSAPP_URL`)
+WhatsApp only. There is no form or backend; links are built in `src/lib/config/contact.ts`.
+
+## Messages
+
+- Short greeting (`WHATSAPP_DEFAULT_MESSAGE`): hero, contact section, floating button, and "Or just say hello" on `/order`.
+- Order template (`buildOrderTemplateMessage()`): the How it works CTA and the main `/order` CTA. It lists every entry in `ORDER_TEMPLATE_FIELDS` with a blank to fill in, then asks for inspiration photos.
 
 ## Customer path
 
-1. User clicks a WhatsApp CTA (hero, contact section, nav, footer, floating button, or `/order` page).
-2. WhatsApp opens with prefilled message template.
-3. Bakery continues intake and confirmation directly in chat.
+1. Visitor taps a CTA; WhatsApp opens with the message prefilled.
+2. They fill in the template and send photos.
+3. The bakery replies with design ideas, pricing and availability, and confirms in chat.
 
-## `/order` page behavior
+## Changing the template
 
-- Path: `/order`
-- Purpose: WhatsApp-first order instructions and checklist.
-- No form submission is available on this page.
-
-## Legacy API behavior
-
-- Path: `/api/orders`
-- Methods: `GET`, `POST`
-- Status: `410 Gone`
-
-Response body:
-
-```json
-{
-  "ok": false,
-  "code": "ORDER_FLOW_REMOVED",
-  "message": "Order submissions are no longer accepted on this endpoint. Please use WhatsApp instead."
-}
-```
+Edit `ORDER_TEMPLATE_FIELDS` in `src/lib/config/contact.ts`. The `/order` ticket and the WhatsApp message update together, and `src/tests/lib/contact.test.ts` checks that every field reaches the encoded link.

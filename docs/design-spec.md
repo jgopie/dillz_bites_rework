@@ -1,94 +1,53 @@
-# Design Spec: Coastal Slate Luxury
+# Design Spec: Warm Artisan Bakery
 
 ## Brand intent
 
-Dillz Bites should feel calm, premium, and precise. The visual language is minimal, cool-toned, and photo-forward:
+Dillz Bites makes playful, personal celebration cakes. The site should feel like a boutique cake studio: warm, generous and photo-led, with enough personality to match the cakes.
 
-- Calm: low-saturation blue/green surfaces and soft gradients
-- Premium: strong typography, restrained highlights, and clean spacing
-- Practical: clear CTAs, high readability, and accessible controls
+Scene: someone planning a birthday or shower, opening the site on their phone in daylight from an Instagram or WhatsApp link. That calls for a light, warm theme, big photos and an obvious way to message.
 
-## Visual direction
+## Color strategy
 
-- Product personality: `Sophistication & Trust`
-- Styling flavor: `Luxury / Refined`
-- Signature move: subtle cool sheen and atmospheric gradients
-- Elevation strategy: surface tint + light borders, shadow used sparingly
+Committed: cream carries the page, raspberry carries identity (CTAs, the occasions band, numerals, script accents), caramel is a quiet secondary for labels and rules, and cocoa grounds the text and footer. All tokens are OKLCH in `src/styles/tokens.css`.
 
-## Tokens (source of truth)
+- Canvas `--bg-canvas` (cream), surfaces `--bg-surface`, blush band `--bg-blush`, footer `--bg-deep` (cocoa)
+- Text `--text-strong` (cocoa), `--text-muted`; inverse variants for the footer and band
+- Primary `--accent-primary` (raspberry) / `--accent-primary-strong` for hover
+- Secondary `--accent-secondary` (caramel, decorative) / `--accent-secondary-text` (AA on cream, for eyebrows and labels)
+- `--whatsapp` / `--whatsapp-strong`: only on WhatsApp-branded buttons (contact CTA, floating button)
 
-All tokens live in `src/styles/tokens.css`.
+## Typography
 
-### Core colors
+- Display: Young Serif (warm, chunky old-style serif) for headings, numerals and captions
+- Body/UI: Figtree
+- Script: Allura, only for the wordmark and a single accent word per heading (`.script-accent`)
+- Headings use fluid `clamp()` sizes; body text is capped near 60ch
 
-- `--bg-canvas: #f3f6f7`
-- `--bg-surface: #fbfcfc`
-- `--bg-deep: #0f1f2a`
-- `--text-strong: #132733`
-- `--text-muted: #516675`
-- `--text-inverse: #eaf1f4`
-- `--accent-primary: #1f4f68`
-- `--accent-secondary: #2f6f67`
-- `--accent-soft: #dbe7e6`
-- `--accent-highlight: #89ada7`
-- `--border-soft: #c5d2d8`
-- `--focus-ring: rgba(31, 79, 104, 0.35)`
-- `--danger: #a24b59`
+## Signature moves
 
-### Surface utility tokens
-
-- `--surface-frost`: translucent light panel for sticky header and outlines
-- `--surface-muted`: muted section background for narrative blocks
-- `--overlay-deep`: dark overlay for text on image
-- `--accent-primary-soft`: subtle selected state / decorative fill
-- `--accent-primary-mist` and `--accent-secondary-mist`: background atmospheric gradients
+- Arch-topped photo frames (`--radius-arch`) in the hero and About section, echoing a bakery window
+- Raspberry "Every cake made to order" sticker and a round overlapping photo in the hero
+- Full-bleed raspberry occasions band under the hero
+- Numbered steps separated by cocoa rules (not cards) in How it works
+- Paper order ticket with a scalloped edge on `/order`
 
 ## Component rules
 
-### Buttons
+- Primary button `.button`: raspberry pill with the WhatsApp glyph when it opens WhatsApp.
+- Outline button `.button-outline`: cocoa outline that fills cocoa on hover.
+- `.button-whatsapp`: WhatsApp green, used sparingly so the brand colour stays raspberry.
+- Carousel: portrait 3:4 slides, `object-fit: cover`, three per view on desktop, two on tablet and one plus a peek on mobile, with captions under each slide.
+- The floating WhatsApp button shrinks to an icon-only circle under 40rem.
 
-- Primary buttons use `--accent-primary` to `--accent-secondary` gradient.
-- Outline buttons use `--surface-frost` and `--border-soft`.
-- Focus must always show with `--focus-ring`.
+## Accessibility
 
-### Header/navigation
+- Text and controls meet WCAG AA on their backgrounds; caramel is never used for body text.
+- Visible focus ring (`--focus-ring`) on every interactive element.
+- Carousel is keyboard operable with labelled arrows and dots.
+- Reveal motion uses exponential ease-out and turns off under `prefers-reduced-motion`.
 
-- Sticky nav uses `--surface-frost` with a cool, thin border.
-- Active nav states use `--accent-primary-soft`.
+## Don't
 
-### Gallery/carousel
-
-- Carousel frame uses light surface tint and border.
-- Slide media stage uses `aspect-ratio: 4 / 3` and `object-fit: contain`.
-- Full image visibility takes priority over edge-to-edge crop.
-
-### Footer
-
-- Footer uses `--bg-deep` with `--text-inverse` variants for readability.
-
-## Typography and rhythm
-
-- Display: `Fraunces`
-- Body/UI: `Manrope`
-- Existing spacing/radius system remains unchanged.
-- Motion remains subtle and must respect `prefers-reduced-motion`.
-
-## Accessibility requirements
-
-- Body and control text must meet WCAG AA contrast on their backgrounds.
-- All interactive controls must keep visible focus states.
-- Carousel controls must remain keyboard accessible and labeled.
-
-## Do / Don't
-
-Do:
-
-- Keep accent usage sparse and intentional.
-- Use token variables instead of hardcoded color values.
-- Preserve negative space and clean section hierarchy.
-
-Don't:
-
-- Reintroduce warm yellow/brown palette values.
-- Use high-saturation colors for large surfaces.
-- Crop cake images by default in the carousel.
+- Use gradients on buttons or text, glass panels, or side-stripe borders.
+- Add more script text than the wordmark and one accent per heading.
+- Use em dashes in copy.

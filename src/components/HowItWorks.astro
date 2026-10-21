@@ -1,0 +1,134 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { buildOrderTemplateMessage, buildWhatsAppHref } from '../lib/config/contact';
+
+const orderHref = buildWhatsAppHref(buildOrderTemplateMessage());
+
+const steps = [
+  {
+    title: 'Message us on WhatsApp',
+    body: 'Share your date, servings, theme and a few inspiration photos. Our order template covers the essentials.'
+  },
+  {
+    title: 'We design and confirm',
+    body: 'We reply with flavour suggestions, a design direction and pricing, then lock in your date once you are happy.'
+  },
+  {
+    title: 'Pickup or delivery',
+    body: 'Your cake is baked fresh for your event and ready at the time we agreed. All that is left is the candles.'
+  }
+];
+---
+
+<section class="section how" id="how-it-works" aria-labelledby="how-title">
+  <div class="container how-grid">
+    <div class="how-intro" data-reveal>
+      <p class="eyebrow">How ordering works</p>
+      <h2 class="section-title" id="how-title">From first message to first slice.</h2>
+      <p class="section-intro">
+        Weekends book up fast, so the more notice you can give, the more we can do. Planning something last
+        minute? Message us anyway and we'll tell you what's possible.
+      </p>
+      <div class="how-actions">
+        <a href={orderHref} class="button" target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon />
+          Use the order template
+        </a>
+        <a href="/order" class="how-link">What to include in your message &rarr;</a>
+      </div>
+    </div>
+
+    <ol class="steps" data-reveal>
+      {
+        steps.map((step, index) => (
+          <li>
+            <span class="step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how {
+    background: var(--bg-blush);
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .how-actions {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .how-link {
+    font-weight: 700;
+    color: var(--accent-primary);
+  }
+
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: var(--space-4);
+    padding-block: var(--space-6);
+    border-top: 1.5px solid var(--text-strong);
+  }
+
+  .steps li:last-child {
+    border-bottom: 1.5px solid var(--text-strong);
+  }
+
+  .step-number {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--accent-primary);
+  }
+
+  .steps h3 {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  }
+
+  .steps p {
+    margin: var(--space-2) 0 0;
+    color: var(--text-muted);
+    max-width: 46ch;
+  }
+
+  @media (max-width: 56rem) {
+    .how-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .steps li {
+      grid-template-columns: 3.25rem 1fr;
+    }
+
+    .step-number {
+      font-size: 2rem;
+    }
+  }
+</style>

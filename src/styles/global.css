@@ -1,5 +1,3 @@
-@import '@radix-ui/themes/styles.css';
-
 * {
   box-sizing: border-box;
 }
@@ -16,16 +14,42 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
+  font-size: 1.0625rem;
   color: var(--text-strong);
-  background:
-    radial-gradient(circle at top right, var(--accent-primary-mist), transparent 48%),
-    radial-gradient(circle at bottom left, var(--accent-secondary-mist), transparent 46%),
-    var(--bg-canvas);
-  line-height: 1.6;
+  background: var(--bg-canvas);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:not(.button):not(.button-outline):not(.button-whatsapp) {
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition-fast), color var(--transition-fast);
+}
+
+a:not(.button):not(.button-outline):not(.button-whatsapp):hover,
+a:not(.button):not(.button-outline):not(.button-whatsapp):focus-visible {
+  text-decoration-color: currentColor;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-wrap: balance;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+p {
+  text-wrap: pretty;
 }
 
 img {
@@ -44,69 +68,105 @@ main {
 }
 
 .section {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
+  padding-block: clamp(4rem, 9vw, 7rem);
 }
 
 .eyebrow {
-  color: var(--accent-primary);
+  display: inline-block;
+  margin: 0 0 var(--space-4);
+  color: var(--accent-secondary-text);
   font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  margin-bottom: var(--space-3);
 }
 
 .section-title {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.9rem, 4.8vw, 3.3rem);
-  line-height: 1.1;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
   color: var(--text-strong);
+  max-width: 22ch;
 }
 
 .section-intro {
-  margin-top: var(--space-4);
+  margin: var(--space-4) 0 0;
   color: var(--text-muted);
-  max-width: 65ch;
+  max-width: 60ch;
+}
+
+.script-accent {
+  font-family: var(--font-brand);
+  color: var(--accent-primary);
+  font-size: 1.15em;
+  letter-spacing: 0;
 }
 
 .button,
-.button-outline {
+.button-outline,
+.button-whatsapp {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
-  padding: 0.75rem 1.3rem;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.4rem;
   border-radius: var(--radius-pill);
   text-decoration: none;
   font-weight: 700;
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
+  cursor: pointer;
   transition: transform var(--transition-fast), background-color var(--transition-fast),
     border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
 }
 
+.button svg,
+.button-whatsapp svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: none;
+}
+
 .button {
-  background: linear-gradient(125deg, var(--accent-primary), var(--accent-secondary));
+  background: var(--accent-primary);
   color: var(--text-inverse);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 6px 16px oklch(47% 0.165 8 / 0.25);
 }
 
 .button:hover,
 .button:focus-visible {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background: var(--accent-primary-strong);
+  transform: translateY(-2px);
+}
+
+.button-whatsapp {
+  background: var(--whatsapp);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-sm);
+}
+
+.button-whatsapp:hover,
+.button-whatsapp:focus-visible {
+  background: var(--whatsapp-strong);
+  transform: translateY(-2px);
 }
 
 .button-outline {
   color: var(--text-strong);
-  border-color: var(--border-soft);
-  background-color: var(--surface-frost);
+  border-color: var(--text-strong);
+  background-color: transparent;
 }
 
 .button-outline:hover,
 .button-outline:focus-visible {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  background-color: var(--text-strong);
+  color: var(--text-inverse);
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
 }
 
 button,
@@ -118,7 +178,7 @@ select {
 
 :focus-visible {
   outline: 3px solid var(--focus-ring);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 /* Screen-reader only utility (used for carousel instructions/live status). */
@@ -137,7 +197,7 @@ select {
 /* Reveal animations only apply when JS is enabled; otherwise content must remain visible. */
 html.js [data-reveal] {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(24px);
   transition: opacity var(--transition-base), transform var(--transition-base);
 }
 
@@ -148,7 +208,7 @@ html.js [data-reveal].is-visible {
 
 @media (max-width: 44rem) {
   .container {
-    width: min(100% - 1.25rem, var(--content-max));
+    width: min(100% - 2rem, var(--content-max));
   }
 }
 

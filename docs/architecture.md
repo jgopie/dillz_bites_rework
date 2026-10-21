@@ -2,41 +2,32 @@
 
 ## Runtime model
 
-- Astro app running in `output: server` mode with `@astrojs/node` adapter.
-- Render hosts the Node server process.
-- Astro is the shell framework; React is used only for targeted interactivity (gallery carousel).
-- No backend order-processing pipeline is active.
+- Static Astro site (`output: 'static'` in `astro.config.mjs`). There is no server, API route or backend.
+- GitHub Pages serves the built `dist/` folder; see [`deployment.md`](deployment.md).
+- Astro renders every page at build time. React is used only for the gallery carousel island (`client:visible`).
 
-## UI architecture
+## Routes
 
-- Astro layout/pages:
-  - `src/layouts/BaseLayout.astro`
-  - `src/pages/index.astro`
-  - `src/pages/order.astro` (repurposed to WhatsApp guidance + CTA)
-- React islands:
-  - `src/components/react/CakeCarousel.tsx`
-- Shared contact config:
-  - `src/lib/config/contact.ts`
+- `/`: homepage with Hero, Occasions band, Gallery, How it works, About and Contact sections.
+- `/order`: WhatsApp order page that shows the order template as a ticket and opens WhatsApp with it prefilled.
 
-## High-level conversion flow
+## Source layout
 
-1. User clicks a primary CTA (hero, contact section, nav/footer, floating button).
-2. CTA opens prefilled WhatsApp chat via `WHATSAPP_URL`.
-3. `/order` page provides a message checklist and the same WhatsApp CTA.
-4. Legacy API route `/api/orders` returns `410 Gone` for backward compatibility.
+- `src/layouts/BaseLayout.astro`: document head (SEO/OG tags, fonts), skip link, floating WhatsApp button, scroll-reveal script.
+- `src/pages/index.astro`, `src/pages/order.astro`: page composition.
+- `src/components/*.astro`: page sections, plus `WhatsAppIcon.astro` (glyph from `simple-icons`, inlined at build time).
+- `src/components/react/CakeCarousel.tsx` + `carousel-slides.ts`: gallery island and its slide data.
+- `src/lib/config/contact.ts`: single source for phone, email, hours, WhatsApp number and messages.
+- `src/styles/tokens.css`, `src/styles/global.css`: design tokens and shared styles.
 
-## Key source files
+## Conversion flow
 
-- `src/lib/config/contact.ts` - phone/email/WhatsApp source of truth
-- `src/components/Hero.astro` - primary homepage WhatsApp CTA
-- `src/components/Contact.astro` - WhatsApp-first contact grid/actions
-- `src/components/Navigation.astro` - global WhatsApp nav link
-- `src/components/Footer.astro` - global WhatsApp footer link
-- `src/components/WhatsAppFloat.astro` - floating WhatsApp CTA
-- `src/pages/api/orders.ts` - deprecated endpoint (`410 Gone`)
+1. Visitor taps a WhatsApp CTA (hero, How it works, contact, `/order`, floating button).
+2. `buildWhatsAppHref()` opens `wa.me` with either the short greeting or the full order template (`buildOrderTemplateMessage()`).
+3. Quotes, design and confirmation continue in the WhatsApp chat.
 
 ## Constraints
 
-- Contact/business values should be updated centrally in `src/lib/config/contact.ts`.
-- External WhatsApp links must use `target="_blank"` and `rel="noopener noreferrer"`.
-- `/api/orders` should remain non-functional unless a future backend order system is intentionally reintroduced.
+- Nothing may require a server at runtime; GitHub Pages only serves files.
+- Change contact details and messages only in `src/lib/config/contact.ts`.
+- External WhatsApp links use `target="_blank"` and `rel="noopener noreferrer"`.

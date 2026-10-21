@@ -31,6 +31,7 @@ const slides: OptimizedCarouselSlide[] = [
   {
     id: 'a',
     alt: 'Slide A',
+    caption: 'Caption A',
     fallbackSrc: '/a.jpg',
     fallbackSrcSet: '/a-420.jpg 420w, /a-640.jpg 640w',
     webpSrcSet: '/a-420.webp 420w, /a-640.webp 640w',
@@ -41,6 +42,7 @@ const slides: OptimizedCarouselSlide[] = [
   {
     id: 'b',
     alt: 'Slide B',
+    caption: 'Caption B',
     fallbackSrc: '/b.jpg',
     fallbackSrcSet: '/b-420.jpg 420w, /b-640.jpg 640w',
     webpSrcSet: '/b-420.webp 420w, /b-640.webp 640w',
@@ -51,6 +53,7 @@ const slides: OptimizedCarouselSlide[] = [
   {
     id: 'c',
     alt: 'Slide C',
+    caption: 'Caption C',
     fallbackSrc: '/c.jpg',
     fallbackSrcSet: '/c-420.jpg 420w, /c-640.jpg 640w',
     webpSrcSet: '/c-420.webp 420w, /c-640.webp 640w',

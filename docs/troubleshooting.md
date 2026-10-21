@@ -1,33 +1,26 @@
 # Troubleshooting
 
-## WhatsApp CTA opens with missing/incorrect message
+## Live site did not update after a push
 
-Checks:
+1. Check the "Deploy to GitHub Pages" run in the Actions tab; a failing `npm test` or build stops the deploy.
+2. Confirm Settings > Pages > Source is "GitHub Actions".
+3. Hard-refresh; GitHub Pages caches for a few minutes.
 
-1. Verify `WHATSAPP_PREFILL` in `src/lib/config/contact.ts`.
-2. Verify `WHATSAPP_URL` is built with `encodeURIComponent`.
-3. Rebuild and reload the site after changes.
+## Custom domain dropped or HTTPS warning
 
-## WhatsApp link does not open in a new tab
+1. Confirm `public/CNAME` contains `www.dillzbites.com` and appears in the built `dist/`.
+2. Confirm the DNS CNAME for `www` points to `jgopie.github.io`.
+3. In Settings > Pages, re-save the custom domain and keep "Enforce HTTPS" on.
 
-Checks:
+## Build fails with an adapter or server error
 
-1. Verify CTA links include `target="_blank"`.
-2. Verify CTA links include `rel="noopener noreferrer"`.
+The site must stay `output: 'static'` with no adapter and no API routes. Remove any `src/pages/api/*` file or `export const prerender = false`.
 
-## Customer still calling deprecated API route
+## WhatsApp opens with a missing or garbled message
 
-Expected behavior:
+1. Check `WHATSAPP_DEFAULT_MESSAGE` and `ORDER_TEMPLATE_FIELDS` in `src/lib/config/contact.ts`.
+2. Run `npm run test`; `contact.test.ts` verifies the encoding.
 
-- `GET /api/orders` and `POST /api/orders` return `410 Gone`.
+## Contact info differs between sections
 
-Action:
-
-1. Update any old frontend integrations/bookmarks to use WhatsApp CTAs.
-
-## Contact info appears inconsistent across sections
-
-Checks:
-
-1. Confirm values in `src/lib/config/contact.ts`.
-2. Confirm components import and use those constants directly.
+All sections import from `src/lib/config/contact.ts`. Search `src/` for hard-coded numbers or emails and replace them with the constants.

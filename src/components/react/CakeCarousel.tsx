@@ -114,7 +114,7 @@ export default function CakeCarousel({ slides, autoplayDelay = 7000 }: CakeCarou
       <div className="cake-carousel__viewport" ref={emblaRef} tabIndex={0} aria-label="Cake gallery carousel">
         <div className="cake-carousel__container">
           {slides.map((slide, index) => (
-            <figure className="cake-carousel__slide" key={slide.id} aria-hidden={index !== selectedIndex}>
+            <figure className="cake-carousel__slide" key={slide.id}>
               <picture className="cake-carousel__media">
                 <source srcSet={slide.webpSrcSet} type="image/webp" sizes={slide.sizes} />
                 <img
@@ -124,23 +124,23 @@ export default function CakeCarousel({ slides, autoplayDelay = 7000 }: CakeCarou
                   alt={slide.alt}
                   width={slide.width}
                   height={slide.height}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  fetchPriority={index === 0 ? 'high' : undefined}
+                  loading={index < 3 ? 'eager' : 'lazy'}
                   decoding="async"
                   draggable={false}
                 />
               </picture>
+              <figcaption className="cake-carousel__caption">{slide.caption}</figcaption>
             </figure>
           ))}
         </div>
       </div>
 
       <div className="cake-carousel__controls" aria-label="Carousel controls">
-        <button type="button" className="button-outline" onClick={scrollPrev} aria-label="Show previous cake image">
-          Previous
+        <button type="button" className="cake-carousel__arrow" onClick={scrollPrev} aria-label="Show previous cake image">
+          <span aria-hidden="true">&larr;</span>
         </button>
-        <button type="button" className="button-outline" onClick={scrollNext} aria-label="Show next cake image">
-          Next
+        <button type="button" className="cake-carousel__arrow" onClick={scrollNext} aria-label="Show next cake image">
+          <span aria-hidden="true">&rarr;</span>
         </button>
       </div>
 

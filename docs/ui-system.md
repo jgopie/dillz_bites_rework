@@ -2,43 +2,36 @@
 
 ## Direction
 
-The visual system uses a **Coastal Slate Luxury** palette: muted blue/green accents, refined neutrals, and low-noise premium contrast.
+Warm artisan bakery: cream canvas, cocoa ink, raspberry accent, caramel secondary. The full rationale is in [`design-spec.md`](design-spec.md).
 
 ## Token source
 
-Core design tokens live in:
-
-- `src/styles/tokens.css`
-
-Global usage patterns live in:
-
-- `src/styles/global.css`
+- Tokens: `src/styles/tokens.css` (OKLCH colours, radii including `--radius-arch`, shadows, spacing, fonts, easing)
+- Shared patterns: `src/styles/global.css` (container, section rhythm, eyebrow, section title, buttons, reveal animation)
 
 ## Color model
 
-- Backgrounds: cool neutrals (`--bg-canvas`, `--bg-surface`, `--bg-deep`)
-- Text: strong slate and muted blue-gray (`--text-strong`, `--text-muted`)
-- Accents: deep slate blue + muted coastal green (`--accent-primary`, `--accent-secondary`, `--accent-highlight`)
-- Interaction/focus: shared ring and border system (`--focus-ring`, `--border-soft`)
-- Surface utilities: translucent and muted overlays (`--surface-frost`, `--surface-muted`, `--overlay-deep`)
+- Backgrounds: `--bg-canvas`, `--bg-surface`, `--bg-blush`, `--bg-deep`
+- Text: `--text-strong`, `--text-muted`, `--text-inverse*`
+- Accents: `--accent-primary(-strong)`, `--accent-secondary(-text)`, `--accent-soft`, `--accent-highlight`
+- WhatsApp: `--whatsapp`, `--whatsapp-strong`
+- Interaction: `--focus-ring`, `--border-soft`
 
 ## Motion and elevation
 
-- Motion uses two standard durations: `--transition-fast` and `--transition-base`.
-- Shadows are cool-toned and consistent: `--shadow-sm`, `--shadow-md`, `--shadow-lg`.
-- Respect reduced-motion preferences globally.
+- `--transition-fast` (180ms) for hovers; `--transition-base` (600ms) for scroll reveals; both use `--ease-out`.
+- Shadows are warm-tinted: `--shadow-sm`, `--shadow-md`, `--shadow-lg`.
+- `prefers-reduced-motion` disables transitions and reveals globally.
 
 ## Component stacks
 
-- Astro components for structural sections (hero/about/contact/footer/nav).
-- Astro components for conversion CTAs (including WhatsApp-first actions and floating button).
-- React islands for interactive widgets:
-  - Carousel: `src/components/react/CakeCarousel.tsx`
+- Astro components for all sections: Navigation, Hero, Occasions, Gallery, HowItWorks, About, Contact, Footer, WhatsAppFloat, WhatsAppIcon.
+- React island for the carousel: `src/components/react/CakeCarousel.tsx`, styled by `src/styles/react/cake-carousel.css`.
 
-Carousel images are prepared server-side in `src/components/Gallery.astro` using `getImage` and rendered as responsive `<picture>` sources in the React island.
+Carousel images are optimised at build time in `src/components/Gallery.astro` with `getImage` (WebP and JPEG at 320 to 860px) and rendered as `<picture>` sources in the island. Without JavaScript, a static grid of the same images is shown.
 
 ## Accessibility baseline
 
-- Focus indicators use `--focus-ring` and must remain visible on all surfaces.
-- Keep semantic heading hierarchy in Astro pages.
-- Preserve contrast at AA minimum for body text and key controls.
+- Focus indicators use `--focus-ring` and stay visible on all surfaces.
+- One `h1` per page, with sections using `h2`/`h3` and `aria-labelledby`.
+- AA contrast minimum for body text and controls.

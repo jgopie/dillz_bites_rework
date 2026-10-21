@@ -1,13 +1,13 @@
 # Dillz Bites Website
 
 Dillz Bites is a marketing website for a sole proprietor baker specializing in bespoke cakes.
-The site is WhatsApp-first for conversions: primary CTAs route customers to prefilled WhatsApp chat, while phone/email/hours remain visible as fallback contact options.
+It is a fully static site hosted on GitHub Pages at https://www.dillzbites.com and deployed on every push to `main`.
+Ordering happens on WhatsApp: CTAs open a chat with a prefilled message (the `/order` page uses a fill-in order template), and phone, email and hours are listed as alternatives.
 
 ## Tech stack
 
-- Astro 5
-- Astro Node adapter (`@astrojs/node`) for server output
-- Astro React integration (`@astrojs/react`) for targeted islands
+- Astro 5 (`output: 'static'`)
+- Astro React integration (`@astrojs/react`) for the gallery carousel island
 - Embla carousel (`embla-carousel-react`)
 - Vitest for unit tests
 
@@ -16,7 +16,6 @@ The site is WhatsApp-first for conversions: primary CTAs route customers to pref
 - Run locally: [`docs/quickstart.md`](docs/quickstart.md)
 - Environment/config: [`docs/configuration.md`](docs/configuration.md)
 - Architecture: [`docs/architecture.md`](docs/architecture.md)
-- Interfaces: [`docs/interfaces.md`](docs/interfaces.md)
 - Development workflow: [`docs/development.md`](docs/development.md)
 - Deployment: [`docs/deployment.md`](docs/deployment.md)
 - Design spec: [`docs/design-spec.md`](docs/design-spec.md)
@@ -29,8 +28,8 @@ The site is WhatsApp-first for conversions: primary CTAs route customers to pref
 ## Scripts
 
 - `npm run dev` - Start local development server
-- `npm run build` - Build production output
-- `npm run preview` - Preview the built app
+- `npm run build` - Build the static site into `dist/`
+- `npm run preview` - Serve `dist/` locally
 - `npm run test` - Run test suite
 - `npm run test:watch` - Run tests in watch mode
 

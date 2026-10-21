@@ -1,83 +1,141 @@
-<section class="section contact" id="contact">
-  <div class="container">
-    <p class="eyebrow" data-reveal>Contact</p>
-    <h2 class="section-title" data-reveal>Tell us what you are celebrating and we will guide your next step.</h2>
-    <p class="section-intro" data-reveal>
-      For custom cakes, the fastest path is the order form. If you need quick clarification first, use the direct
-      contact options below.
-    </p>
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { EMAIL, HOURS, PHONE_DISPLAY, PHONE_E164, buildWhatsAppHref } from '../lib/config/contact';
 
-    <div class="contact-grid" data-reveal>
-      <article>
-        <h3>Phone</h3>
-        <p>Consultations and time-sensitive updates.</p>
-        <a href="tel:+18687674628">(868) 767-4628</a>
-      </article>
+const whatsappHref = buildWhatsAppHref();
+---
 
-      <article>
-        <h3>Email</h3>
-        <p>General inquiries and order follow-up.</p>
-        <a href="mailto:orders@dillzbites.com">orders@dillzbites.com</a>
-      </article>
-
-      <article>
-        <h3>Hours</h3>
-        <p>Tuesday-Saturday: 9:00 AM-6:00 PM</p>
-        <p>Sunday: 10:00 AM-4:00 PM</p>
-        <p>Closed Mondays</p>
-      </article>
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="container contact-grid">
+    <div data-reveal>
+      <p class="eyebrow">Contact</p>
+      <h2 class="section-title" id="contact-title">
+        What are we <span class="script-accent">celebrating?</span>
+      </h2>
+      <p class="section-intro">
+        WhatsApp is the quickest way to check a date, get a quote and send inspiration photos. Prefer to talk?
+        Call or email and we'll get back to you.
+      </p>
+      <a href={whatsappHref} class="button-whatsapp contact-cta" target="_blank" rel="noopener noreferrer">
+        <WhatsAppIcon />
+        Chat on WhatsApp
+      </a>
     </div>
 
-    <div class="contact-actions" data-reveal>
-      <a href="/order" class="button">Place a Cake Order</a>
-      <a href="mailto:orders@dillzbites.com" class="button-outline">Send an Email</a>
+    <div class="contact-details" data-reveal>
+      <dl>
+        <div>
+          <dt>Phone</dt>
+          <dd><a href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+        </div>
+        <div>
+          <dt>Hours</dt>
+          <dd>
+            <ul class="hours">
+              {
+                HOURS.map((row) => (
+                  <li>
+                    <span>{row.days}</span>
+                    <span>{row.time}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </dd>
+        </div>
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
   .contact-grid {
-    margin-top: var(--space-6);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-4);
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
   }
 
-  .contact-grid article {
+  .contact-cta {
+    margin-top: var(--space-6);
+  }
+
+  .contact-details {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
     background: var(--bg-surface);
     border: 1px solid var(--border-soft);
-    border-radius: var(--radius-md);
-    padding: var(--space-5);
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-lg);
   }
 
-  .contact-grid h3 {
+  dl {
     margin: 0;
-    font-family: var(--font-display);
-    font-size: 1.2rem;
+    display: grid;
+    gap: var(--space-5);
   }
 
-  .contact-grid p {
-    margin: var(--space-2) 0;
-    color: var(--text-muted);
+  dl > div + div {
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-soft);
   }
 
-  .contact-grid a {
-    color: var(--accent-primary);
+  dt {
+    font-size: 0.8rem;
     font-weight: 700;
-    text-decoration: none;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent-secondary-text);
   }
 
-  .contact-actions {
-    margin-top: var(--space-6);
+  dd {
+    margin: var(--space-1) 0 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    overflow-wrap: anywhere;
+  }
+
+  dd a {
+    color: var(--text-strong);
+  }
+
+  .hours {
+    margin: var(--space-2) 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .hours li {
     display: flex;
-    gap: var(--space-3);
+    justify-content: space-between;
+    gap: var(--space-4);
     flex-wrap: wrap;
+  }
+
+  .hours li span:last-child {
+    color: var(--text-muted);
   }
 
   @media (max-width: 52rem) {
     .contact-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .hours li {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hours li + li {
+      margin-top: var(--space-2);
     }
   }
 </style>

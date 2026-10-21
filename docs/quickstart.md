@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - npm 10+
 
 ## Install
@@ -11,21 +11,13 @@
 npm ci
 ```
 
-## Optional environment file
-
-Copy `.env.example` to `.env` only if you need local custom variables for future features.
-
-```bash
-cp .env.example .env
-```
-
 ## Run locally
 
 ```bash
 npm run dev
 ```
 
-Default local URL: `http://localhost:4321` (IPv4 also available at `http://127.0.0.1:4321`).
+Default local URL: `http://localhost:4321`.
 
 ## Run tests
 
@@ -33,20 +25,17 @@ Default local URL: `http://localhost:4321` (IPv4 also available at `http://127.0
 npm run test
 ```
 
-## Build production output
+## Build and preview
 
 ```bash
 npm run build
+npm run preview
 ```
 
-With server output enabled, production entrypoint is:
-
-```bash
-node ./dist/server/entry.mjs
-```
+`npm run build` writes the static site to `dist/`; `npm run preview` serves it at `http://localhost:4321`.
 
 ## UI stack
 
-- Astro pages/layouts for shell rendering
-- React islands via `@astrojs/react`
-- Embla (`embla-carousel-react`) for gallery carousel
+- Astro pages and components, rendered at build time
+- React island via `@astrojs/react` for the gallery
+- Embla (`embla-carousel-react`) for the carousel

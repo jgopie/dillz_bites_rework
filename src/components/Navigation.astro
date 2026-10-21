@@ -1,21 +1,22 @@
 ---
+import { BUSINESS_NAME } from '../lib/config/contact';
+
 interface Props {
   currentPath?: '/' | '/order';
 }
 
 const { currentPath = '/' } = Astro.props;
 const links = [
-  { href: '/', label: 'Home', isAnchor: false },
-  { href: '/#gallery', label: 'Gallery', isAnchor: true },
-  { href: '/#about', label: 'About', isAnchor: true },
-  { href: '/#contact', label: 'Contact', isAnchor: true },
-  { href: '/order', label: 'Order', isAnchor: false }
+  { href: '/#gallery', label: 'Cakes' },
+  { href: '/#how-it-works', label: 'How it works' },
+  { href: '/#about', label: 'About' },
+  { href: '/#contact', label: 'Contact' }
 ];
 ---
 
 <header class="site-header">
   <div class="container nav-row">
-    <a class="brand" href="/" aria-label="Dillz Bites home">Dillz Bites</a>
+    <a class="brand" href="/" aria-label={`${BUSINESS_NAME} home`}>{BUSINESS_NAME}</a>
     <button
       class="menu-toggle"
       type="button"
@@ -28,16 +29,14 @@ const links = [
       <span></span>
     </button>
     <nav id="primary-nav" class="nav-links" aria-label="Primary">
-      {
-        links.map((link) => {
-          const isActive = !link.isAnchor && currentPath === link.href;
-          return (
-            <a href={link.href} aria-current={isActive ? 'page' : undefined} class={isActive ? 'active' : ''}>
-              {link.label}
-            </a>
-          );
-        })
-      }
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      <a
+        href="/order"
+        class="nav-order"
+        aria-current={currentPath === '/order' ? 'page' : undefined}
+      >
+        Order a cake
+      </a>
     </nav>
   </div>
 </header>
@@ -67,13 +66,13 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(10px);
     background: var(--surface-frost);
-    border-bottom: 1px solid var(--accent-primary-mist);
+    border-bottom: 1px solid var(--border-soft);
   }
 
   .nav-row {
-    min-height: 4.25rem;
+    position: relative;
+    min-height: 4.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,35 +80,47 @@ const links = [
   }
 
   .brand {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    color: var(--text-strong);
+    font-family: var(--font-brand);
+    font-size: 2.35rem;
+    line-height: 1;
+    color: var(--accent-primary);
     text-decoration: none;
+    padding-top: 0.2rem;
   }
 
   .nav-links {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-2);
   }
 
   .nav-links a {
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.96rem;
-    padding: 0.4rem 0.65rem;
-    border-radius: var(--radius-pill);
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
     color: var(--text-muted);
-    transition: color var(--transition-fast), background-color var(--transition-fast);
+    transition: color var(--transition-fast);
   }
 
   .nav-links a:hover,
-  .nav-links a:focus-visible,
-  .nav-links a.active {
+  .nav-links a:focus-visible {
     color: var(--text-strong);
-    background-color: var(--accent-primary-soft);
+  }
+
+  .nav-links .nav-order {
+    margin-left: var(--space-3);
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-pill);
+    background: var(--accent-primary);
+    color: var(--text-inverse);
+  }
+
+  .nav-links .nav-order:hover,
+  .nav-links .nav-order:focus-visible,
+  .nav-links .nav-order[aria-current='page'] {
+    background: var(--accent-primary-strong);
+    color: var(--text-inverse);
   }
 
   .menu-toggle {
@@ -117,23 +128,23 @@ const links = [
     border: 1px solid var(--border-soft);
     background: var(--bg-surface);
     border-radius: var(--radius-sm);
-    padding: 0.45rem;
+    padding: 0.6rem;
     cursor: pointer;
   }
 
   .menu-toggle span {
     display: block;
-    width: 1.1rem;
+    width: 1.2rem;
     height: 0.125rem;
     border-radius: var(--radius-pill);
     background-color: var(--text-strong);
   }
 
   .menu-toggle span + span {
-    margin-top: 0.2rem;
+    margin-top: 0.25rem;
   }
 
-  @media (max-width: 56rem) {
+  @media (max-width: 52rem) {
     .menu-toggle {
       display: block;
     }
@@ -141,13 +152,13 @@ const links = [
     .nav-links {
       position: absolute;
       top: calc(100% + 0.5rem);
-      right: 0.75rem;
-      left: 0.75rem;
-      padding: 0.7rem;
-      background: var(--surface-frost);
+      right: 0;
+      left: 0;
+      padding: var(--space-3);
+      background: var(--bg-surface);
       border: 1px solid var(--border-soft);
       border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
+      box-shadow: var(--shadow-md);
       flex-direction: column;
       align-items: stretch;
       opacity: 0;
@@ -163,7 +174,12 @@ const links = [
     }
 
     .nav-links a {
-      padding: 0.65rem 0.75rem;
+      padding: 0.75rem;
+    }
+
+    .nav-links .nav-order {
+      margin: var(--space-2) 0 0;
+      text-align: center;
     }
   }
 </style>

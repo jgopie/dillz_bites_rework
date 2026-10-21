@@ -1,73 +1,106 @@
-<section class="section about" id="about">
-  <div class="container about-grid">
-    <div data-reveal>
-      <p class="eyebrow">About Dillz Bites</p>
-      <h2 class="section-title">From sketch to final slice, your cake is built to match your moment.</h2>
-      <p class="section-intro">
-        Dillz Bites is a sole-proprietor bakery focused on custom cakes for meaningful celebrations. Every order is
-        handmade in small batches with premium ingredients, thoughtful flavor pairing, and polished finishing details.
-      </p>
-      <p class="section-intro">
-        We begin with your event goals, then shape design, portion size, and decoration style around your budget and
-        timeline. The result is a cake that feels personal, memorable, and photo-ready.
-      </p>
-    </div>
+---
+import { Image } from 'astro:assets';
+import brideCake from '../assets/images/cake_6.jpg';
+---
 
-    <div class="about-cards" data-reveal>
-      <article>
-        <h3>Design-first custom work</h3>
-        <p>Each brief is tailored, with color direction and design motifs selected for your event.</p>
-      </article>
-      <article>
-        <h3>Flavor and finish balance</h3>
-        <p>Texture, sweetness, and serving practicality are tuned so the cake looks and tastes exceptional.</p>
-      </article>
-      <article>
-        <h3>Clear communication</h3>
-        <p>Orders are reviewed quickly with confirmation details shared directly by email.</p>
-      </article>
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <figure class="about-photo" data-reveal>
+      <Image
+        src={brideCake}
+        alt="Bride to Be cake with an illustrated bride in gold jewellery, a red rose and sunflowers"
+        widths={[420, 640, 860]}
+        sizes="(max-width: 52rem) 90vw, 30rem"
+      />
+    </figure>
+
+    <div class="about-copy" data-reveal>
+      <p class="eyebrow">About Dillz Bites</p>
+      <h2 class="section-title" id="about-title">A small kitchen with a big eye for detail.</h2>
+      <p class="section-intro">
+        Dillz Bites is a small, independent bakery making custom cakes for the moments people remember. Every
+        order is handmade in small batches with good ingredients, careful flavour pairing and finishing touches
+        you'll want to photograph before anyone cuts in.
+      </p>
+      <p class="section-intro">
+        We start with your event, not a catalogue. Design, size and decoration are shaped around your theme,
+        your guest list and your budget, so the cake feels like it belongs at your party and nowhere else.
+      </p>
+
+      <dl class="about-facts">
+        <div>
+          <dt>Made to order</dt>
+          <dd>Nothing pre-made, nothing off the shelf.</dd>
+        </div>
+        <div>
+          <dt>Design first</dt>
+          <dd>Colours, toppers and motifs chosen for your event.</dd>
+        </div>
+        <div>
+          <dt>Straight answers</dt>
+          <dd>Quotes, updates and confirmations right in WhatsApp.</dd>
+        </div>
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
-  .about {
-    background-color: var(--surface-muted);
-  }
-
   .about-grid {
     display: grid;
-    gap: var(--space-6);
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: start;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2.5rem, 7vw, 6rem);
+    align-items: center;
   }
 
-  .about-cards {
-    display: grid;
-    gap: var(--space-4);
-  }
-
-  .about-cards article {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--radius-md);
-    padding: var(--space-5);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .about-cards h3 {
+  .about-photo {
     margin: 0;
+    border-radius: var(--radius-arch);
+    overflow: clip;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .about-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .about-facts {
+    margin: var(--space-7) 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .about-facts div {
+    padding-top: var(--space-4);
+    border-top: 3px solid var(--accent-secondary);
+  }
+
+  .about-facts dt {
     font-family: var(--font-display);
     font-size: 1.25rem;
   }
 
-  .about-cards p {
-    margin: var(--space-3) 0 0;
+  .about-facts dd {
+    margin: var(--space-2) 0 0;
     color: var(--text-muted);
+    font-size: 0.97rem;
   }
 
-  @media (max-width: 58rem) {
+  @media (max-width: 52rem) {
     .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-photo {
+      max-width: 26rem;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .about-facts {
       grid-template-columns: 1fr;
     }
   }

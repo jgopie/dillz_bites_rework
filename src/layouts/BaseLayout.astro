@@ -1,6 +1,7 @@
 ---
 import '../styles/tokens.css';
 import '../styles/global.css';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 
 interface Props {
   title: string;
@@ -30,6 +31,7 @@ const socialImage = 'https://www.dillzbites.com/images/cake_collage.jpg';
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href={siteUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#faf3ea" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dillz Bites" />
@@ -47,13 +49,14 @@ const socialImage = 'https://www.dillzbites.com/images/cake_collage.jpg';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
+    <WhatsAppFloat />
     <script is:inline>
       const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
 
@@ -96,8 +99,9 @@ const socialImage = 'https://www.dillzbites.com/images/cake_collage.jpg';
 <style>
   .skip-link {
     position: absolute;
-    top: -40px;
+    top: 0.75rem;
     left: 0.75rem;
+    transform: translateY(-200%);
     padding: 0.65rem 0.9rem;
     border-radius: 0.5rem;
     background: var(--text-strong);
@@ -107,6 +111,6 @@ const socialImage = 'https://www.dillzbites.com/images/cake_collage.jpg';
   }
 
   .skip-link:focus {
-    top: 0.75rem;
+    transform: none;
   }
 </style>
