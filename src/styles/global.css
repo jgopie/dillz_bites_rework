@@ -16,7 +16,11 @@ body {
   font-family: var(--font-body);
   font-size: 1.0625rem;
   color: var(--text-strong);
-  background: var(--bg-canvas);
+  /* Faint paper grain over the cream canvas. */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    var(--bg-canvas);
+  overflow-x: clip;
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -94,6 +98,40 @@ main {
   max-width: 60ch;
 }
 
+/* Dark sections re-point the text/border tokens so shared components invert cleanly. */
+.on-dark {
+  --text-strong: oklch(96.5% 0.014 78);
+  --text-muted: oklch(96.5% 0.014 78 / 0.72);
+  --text-inverse: oklch(25% 0.032 40);
+  --border-soft: oklch(96.5% 0.014 78 / 0.22);
+  --accent-secondary-text: var(--accent-highlight);
+  --focus-ring: oklch(84% 0.08 75 / 0.7);
+  background-color: var(--bg-deep);
+  color: var(--text-strong);
+}
+
+/* Piped-buttercream scallop hanging off the bottom of a section; set --scallop-color to the section colour. */
+.scallop-bottom {
+  position: relative;
+}
+
+.scallop-bottom::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--scallop-size, 1.4rem) * -1 + 1px);
+  height: var(--scallop-size, 1.4rem);
+  background: radial-gradient(
+      circle at 50% 0,
+      var(--scallop-color, var(--bg-canvas)) calc(var(--scallop-size, 1.4rem) - 0.5px),
+      transparent var(--scallop-size, 1.4rem)
+    )
+    center top / calc(var(--scallop-size, 1.4rem) * 2) var(--scallop-size, 1.4rem) repeat-x;
+  pointer-events: none;
+}
+
 .script-accent {
   font-family: var(--font-brand);
   color: var(--accent-primary);
@@ -160,6 +198,45 @@ main {
 .button-outline:focus-visible {
   background-color: var(--text-strong);
   color: var(--text-inverse);
+}
+
+/* Chunky cream button for coloured sections: a raised "pressable" edge instead of a flat pill. */
+.button-cream {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 3.6rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-canvas);
+  color: var(--accent-primary-strong);
+  font-weight: 800;
+  font-size: 1.08rem;
+  text-decoration: none;
+  box-shadow: 0 0.35rem 0 var(--accent-primary-strong), 0 1.2rem 2rem oklch(25% 0.1 10 / 0.35);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.button-cream svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  flex: none;
+}
+
+.button-cream:hover,
+.button-cream:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 0.55rem 0 var(--accent-primary-strong), 0 1.5rem 2.4rem oklch(25% 0.1 10 / 0.4);
+}
+
+.button-cream:active {
+  transform: translateY(0.3rem);
+  box-shadow: 0 0.05rem 0 var(--accent-primary-strong), 0 0.6rem 1rem oklch(25% 0.1 10 / 0.3);
+}
+
+.button:active,
+.button-whatsapp:active {
+  transform: translateY(1px);
 }
 
 .card {

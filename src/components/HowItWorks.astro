@@ -24,7 +24,7 @@ const steps = [
   <div class="container how-grid">
     <div class="how-intro" data-reveal>
       <p class="eyebrow">How ordering works</p>
-      <h2 class="section-title" id="how-title">From first message to first slice.</h2>
+      <h2 class="section-title" id="how-title">From first message to first <span class="script-accent">slice.</span></h2>
       <p class="section-intro">
         Weekends book up fast, so the more notice you can give, the more we can do. Planning something last
         minute? Message us anyway and we'll tell you what's possible.
@@ -57,13 +57,23 @@ const steps = [
 <style>
   .how {
     background: var(--bg-blush);
+    padding-top: clamp(5.5rem, 10vw, 8rem);
   }
 
   .how-grid {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: clamp(2.5rem, 6vw, 6rem);
     align-items: start;
+  }
+
+  .how-intro {
+    position: sticky;
+    top: calc(var(--sticky-header-offset) + 1.5rem);
+  }
+
+  .how-intro .section-title {
+    font-size: clamp(2.4rem, 5.4vw, 4.4rem);
   }
 
   .how-actions {
@@ -84,51 +94,78 @@ const steps = [
     padding: 0;
     list-style: none;
     display: grid;
+    gap: var(--space-5);
   }
 
+  /* Steps step down and to the right, like tiers. */
   .steps li {
     display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    gap: var(--space-4);
-    padding-block: var(--space-6);
-    border-top: 1.5px solid var(--text-strong);
+    grid-template-columns: auto 1fr;
+    gap: var(--space-5);
+    align-items: center;
+    padding: var(--space-5) var(--space-6) var(--space-5) var(--space-5);
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 0.5rem 0 oklch(47% 0.165 8 / 0.12);
+    transition: transform var(--transition-fast);
   }
 
-  .steps li:last-child {
-    border-bottom: 1.5px solid var(--text-strong);
+  .steps li:nth-child(2) {
+    margin-left: 8%;
+  }
+
+  .steps li:nth-child(3) {
+    margin-left: 16%;
+  }
+
+  .steps li:hover {
+    transform: translateX(0.5rem);
   }
 
   .step-number {
     font-family: var(--font-display);
-    font-size: 2.6rem;
-    line-height: 1;
-    color: var(--accent-primary);
+    font-size: clamp(4rem, 8vw, 6.5rem);
+    line-height: 0.85;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent-primary);
+    min-width: 1.15em;
   }
 
   .steps h3 {
     margin: 0;
-    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    font-size: clamp(1.4rem, 2.4vw, 1.8rem);
   }
 
   .steps p {
     margin: var(--space-2) 0 0;
     color: var(--text-muted);
-    max-width: 46ch;
+    max-width: 44ch;
   }
 
   @media (max-width: 56rem) {
     .how-grid {
       grid-template-columns: 1fr;
     }
+
+    .how-intro {
+      position: static;
+    }
+
+    .steps li:nth-child(2),
+    .steps li:nth-child(3) {
+      margin-left: 0;
+    }
   }
 
   @media (max-width: 30rem) {
     .steps li {
-      grid-template-columns: 3.25rem 1fr;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      padding: var(--space-5);
     }
 
     .step-number {
-      font-size: 2rem;
+      font-size: 3.5rem;
     }
   }
 </style>

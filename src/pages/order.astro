@@ -22,11 +22,11 @@ const blankHref = buildWhatsAppHref();
   canonicalPath="/order"
 >
   <Navigation currentPath="/order" />
-  <main id="main-content" class="section order">
+  <main id="main-content" class="section order scallop-bottom">
     <div class="container order-grid">
       <div class="order-copy" data-reveal>
         <p class="eyebrow">Order a cake</p>
-        <h1 class="section-title">Your cake starts with one message.</h1>
+        <h1 class="section-title">Your cake starts with <span class="script-accent">one</span> message.</h1>
         <p class="section-intro">
           Tap the button and WhatsApp opens with our order template ready to fill in. Add what you know, leave
           blank what you don't, then send a few inspiration photos. We'll reply with ideas, pricing and
@@ -34,7 +34,7 @@ const blankHref = buildWhatsAppHref();
         </p>
 
         <div class="order-actions">
-          <a href={templateHref} class="button" target="_blank" rel="noopener noreferrer">
+          <a href={templateHref} class="button-cream" target="_blank" rel="noopener noreferrer">
             <WhatsAppIcon />
             Open the order template
           </a>
@@ -72,7 +72,31 @@ const blankHref = buildWhatsAppHref();
 
 <style>
   .order {
-    padding-top: clamp(3rem, 7vw, 5.5rem);
+    --scallop-color: var(--accent-primary);
+    min-height: auto;
+    padding-block: clamp(3.5rem, 8vw, 6rem) clamp(4.5rem, 9vw, 7rem);
+    background:
+      radial-gradient(ellipse 55% 70% at 90% 30%, oklch(55% 0.17 12 / 0.9), transparent 70%),
+      var(--accent-primary);
+    color: var(--text-inverse);
+    overflow-x: clip;
+  }
+
+  .order :global(:focus-visible) {
+    outline-color: var(--bg-canvas);
+  }
+
+  .order .eyebrow,
+  .order-copy .script-accent {
+    color: var(--accent-highlight);
+  }
+
+  .order-copy .section-title {
+    color: var(--text-inverse);
+  }
+
+  .order-copy .section-intro {
+    color: var(--text-inverse-soft);
   }
 
   .order-grid {
@@ -83,8 +107,9 @@ const blankHref = buildWhatsAppHref();
   }
 
   .order-copy h1 {
-    font-size: clamp(2.6rem, 6vw, 4.6rem);
-    max-width: 13ch;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.95;
+    max-width: 11ch;
   }
 
   .order-actions {
@@ -97,16 +122,17 @@ const blankHref = buildWhatsAppHref();
 
   .order-plain {
     font-weight: 700;
-    color: var(--accent-primary);
+    color: var(--text-inverse);
+    text-decoration-color: currentColor !important;
   }
 
   .order-alt {
     margin: var(--space-6) 0 0;
-    color: var(--text-muted);
+    color: var(--text-inverse-soft);
   }
 
   .order-alt a {
-    color: var(--text-strong);
+    color: var(--text-inverse);
     font-weight: 700;
     text-decoration-color: currentColor !important;
   }
@@ -118,8 +144,9 @@ const blankHref = buildWhatsAppHref();
     padding: var(--space-6) var(--space-6) var(--space-7);
     background: var(--bg-surface);
     border-radius: var(--radius-md) var(--radius-md) 0 0;
-    box-shadow: var(--shadow-lg);
-    transform: rotate(1.5deg);
+    color: var(--text-strong);
+    box-shadow: 0 2rem 3.5rem oklch(22% 0.08 10 / 0.4);
+    rotate: 2.5deg;
     --scallop: radial-gradient(circle at 0.75rem 0, transparent 0.6rem, var(--bg-surface) 0.62rem);
   }
 
@@ -209,7 +236,7 @@ const blankHref = buildWhatsAppHref();
     }
 
     .ticket {
-      transform: none;
+      rotate: 0deg;
       padding-inline: var(--space-5);
     }
   }

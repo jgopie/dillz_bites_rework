@@ -8,7 +8,7 @@ Scene: someone planning a birthday or shower, opening the site on their phone in
 
 ## Color strategy
 
-Committed: cream carries the page, raspberry carries identity (CTAs, the occasions band, numerals, script accents), caramel is a quiet secondary for labels and rules, and cocoa grounds the text and footer. All tokens are OKLCH in `src/styles/tokens.css`.
+Committed: raspberry owns the hero, closing CTA and order page; cream carries the reading sections; cocoa anchors the gallery, footer and text; caramel is the secondary for the ribbon, badge, labels and script accents. All tokens are OKLCH in `src/styles/tokens.css`.
 
 - Canvas `--bg-canvas` (cream), surfaces `--bg-surface`, blush band `--bg-blush`, footer `--bg-deep` (cocoa)
 - Text `--text-strong` (cocoa), `--text-muted`; inverse variants for the footer and band
@@ -25,11 +25,15 @@ Committed: cream carries the page, raspberry carries identity (CTAs, the occasio
 
 ## Signature moves
 
-- Arch-topped photo frames (`--radius-arch`) in the hero and About section, echoing a bakery window
-- Raspberry "Every cake made to order" sticker and a round overlapping photo in the hero
-- Full-bleed raspberry occasions band under the hero
-- Numbered steps separated by cocoa rules (not cards) in How it works
-- Paper order ticket with a scalloped edge on `/order`
+- Section rhythm with its own colour per section: raspberry hero, caramel ribbon, cocoa gallery, blush steps, cream About, raspberry closing CTA, cocoa footer
+- Drenched raspberry hero with oversized display type (lines rise in on load) and a fan of three framed snapshots with script captions; the fan spreads on hover
+- Slowly spinning caramel "Made to order, baked fresh" badge
+- Tilted caramel ribbon with a scrolling marquee of occasions and sparkle separators (static under reduced motion)
+- Piped-buttercream scallop edges between sections (`.scallop-bottom` + `--scallop-color` in `global.css`)
+- Dark "display case" gallery using the `.on-dark` token scope, with staggered slide heights
+- Giant outlined numerals on staggered step cards in How it works
+- Chunky cream `.button-cream` with a raised, pressable edge on raspberry sections
+- Arch-topped About photo, tilted contact card and paper order ticket with a scalloped edge
 
 ## Component rules
 

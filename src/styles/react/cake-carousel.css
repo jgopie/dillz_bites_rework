@@ -33,6 +33,10 @@
   padding-left: var(--space-4);
 }
 
+.cake-carousel__slide:nth-child(even) {
+  padding-top: var(--space-7);
+}
+
 .cake-carousel__media {
   display: block;
   aspect-ratio: 3 / 4;
@@ -115,6 +119,10 @@
 }
 
 @media (max-width: 40rem) {
+  .cake-carousel__slide:nth-child(even) {
+    padding-top: 0;
+  }
+
   /* Arrows go left so the floating WhatsApp button never covers them. */
   .cake-carousel {
     grid-template-columns: auto 1fr;

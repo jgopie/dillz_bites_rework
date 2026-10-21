@@ -16,7 +16,7 @@ const whatsappHref = buildWhatsAppHref();
         WhatsApp is the quickest way to check a date, get a quote and send inspiration photos. Prefer to talk?
         Call or email and we'll get back to you.
       </p>
-      <a href={whatsappHref} class="button-whatsapp contact-cta" target="_blank" rel="noopener noreferrer">
+      <a href={whatsappHref} class="button-cream contact-cta" target="_blank" rel="noopener noreferrer">
         <WhatsAppIcon />
         Chat on WhatsApp
       </a>
@@ -53,22 +53,58 @@ const whatsappHref = buildWhatsAppHref();
 </section>
 
 <style>
+  .contact {
+    position: relative;
+    background:
+      radial-gradient(ellipse 50% 80% at 10% 100%, oklch(55% 0.17 12 / 0.85), transparent 70%),
+      var(--accent-primary);
+    color: var(--text-inverse);
+    padding-block: clamp(6rem, 11vw, 9rem) clamp(5rem, 9vw, 7rem);
+    overflow: clip;
+  }
+
   .contact-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: clamp(2.5rem, 6vw, 6rem);
     align-items: center;
+  }
+
+  .contact .eyebrow {
+    color: var(--accent-highlight);
+  }
+
+  .contact .section-title {
+    color: var(--text-inverse);
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.92;
+    max-width: 9ch;
+  }
+
+  .contact .script-accent {
+    color: var(--accent-highlight);
+  }
+
+  .contact .section-intro {
+    color: var(--text-inverse-soft);
+    max-width: 44ch;
   }
 
   .contact-cta {
     margin-top: var(--space-6);
   }
 
+  .contact :global(:focus-visible) {
+    outline-color: var(--bg-canvas);
+  }
+
   .contact-details {
+    rotate: 2deg;
     padding: clamp(1.5rem, 3vw, 2.5rem);
     background: var(--bg-surface);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--radius-lg);
+    color: var(--text-strong);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2rem 3rem oklch(22% 0.08 10 / 0.35);
   }
 
   dl {
@@ -79,7 +115,7 @@ const whatsappHref = buildWhatsAppHref();
 
   dl > div + div {
     padding-top: var(--space-5);
-    border-top: 1px solid var(--border-soft);
+    border-top: 2px dashed var(--border-soft);
   }
 
   dt {
@@ -93,7 +129,7 @@ const whatsappHref = buildWhatsAppHref();
   dd {
     margin: var(--space-1) 0 0;
     font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     overflow-wrap: anywhere;
   }
 
@@ -125,6 +161,10 @@ const whatsappHref = buildWhatsAppHref();
   @media (max-width: 52rem) {
     .contact-grid {
       grid-template-columns: 1fr;
+    }
+
+    .contact-details {
+      rotate: 0deg;
     }
   }
 

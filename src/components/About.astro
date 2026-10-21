@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import brideCake from '../assets/images/cake_6.jpg';
 ---
 
-<section class="section about" id="about" aria-labelledby="about-title">
+<section class="section about scallop-bottom" id="about" aria-labelledby="about-title">
   <div class="container about-grid">
     <figure class="about-photo" data-reveal>
       <Image
@@ -46,6 +46,11 @@ import brideCake from '../assets/images/cake_6.jpg';
 </section>
 
 <style>
+  .about {
+    --scallop-color: var(--bg-canvas);
+    padding-bottom: clamp(5rem, 10vw, 8rem);
+  }
+
   .about-grid {
     display: grid;
     grid-template-columns: 0.85fr 1.15fr;
@@ -54,7 +59,10 @@ import brideCake from '../assets/images/cake_6.jpg';
   }
 
   .about-photo {
+    position: relative;
     margin: 0;
+    /* `rotate` composes with the reveal animation's transform. */
+    rotate: -2deg;
     border-radius: var(--radius-arch);
     overflow: clip;
     box-shadow: var(--shadow-lg);

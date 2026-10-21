@@ -89,7 +89,12 @@ const socialImage = 'https://www.dillzbites.com/images/cake_collage.jpg';
         );
 
         for (const node of nodes) {
-          observer.observe(node);
+          // Content already on screen at load shouldn't wait on the observer.
+          if (node.getBoundingClientRect().top < window.innerHeight * 0.9) {
+            node.classList.add('is-visible');
+          } else {
+            observer.observe(node);
+          }
         }
       }
     </script>
